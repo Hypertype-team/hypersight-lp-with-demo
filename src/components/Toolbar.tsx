@@ -3,6 +3,8 @@ import { Button } from "./ui/button";
 import { useNavigate } from "react-router-dom";
 
 const Toolbar = () => {
+  const navigate = useNavigate();
+  
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -41,6 +43,12 @@ const Toolbar = () => {
               className="text-white/80 hover:text-white transition-colors text-sm font-medium"
             >
               Pricing
+            </button>
+            <button 
+              onClick={() => navigate('/demo')}
+              className="text-white/80 hover:text-white transition-colors text-sm font-medium"
+            >
+              Demo
             </button>
             <a 
               href="https://www.hypertype.ai/"
