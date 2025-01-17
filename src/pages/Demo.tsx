@@ -30,7 +30,6 @@ const Demo = () => {
       duration: 5000,
     });
 
-    // Simulate waiting for API key input
     await new Promise(resolve => setTimeout(resolve, 2000));
     
     setIsConnecting(false);
@@ -41,7 +40,6 @@ const Demo = () => {
       duration: 5000,
     });
     
-    // Continue with demo flow
     setStep(2);
   };
 
@@ -56,46 +54,32 @@ const Demo = () => {
   return (
     <div className="min-h-screen bg-background text-white">
       {/* Back Button */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="fixed top-6 left-6 z-50"
+      <Button
+        variant="ghost"
+        onClick={handleBack}
+        className="fixed top-6 left-6 z-50 text-white/80 hover:text-white flex items-center gap-2"
       >
-        <Button
-          variant="ghost"
-          onClick={handleBack}
-          className="text-white/80 hover:text-white flex items-center gap-2"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back
-        </Button>
-      </motion.div>
+        <ArrowLeft className="w-4 h-4" />
+        Back
+      </Button>
 
       {/* Step 1: Connect Support System */}
-      <motion.div 
-        initial={false}
-        animate={{ opacity: step === 1 ? 1 : 0 }}
-        className={`fixed inset-0 flex items-center justify-center ${step !== 1 ? 'pointer-events-none' : ''}`}
+      <div 
+        className={`fixed inset-0 flex items-center justify-center transition-opacity duration-300 ${
+          step === 1 ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
       >
         <div className="max-w-2xl mx-auto px-4">
-          <motion.div
-            initial={false}
-            animate={{ y: 0, opacity: 1 }}
-            className="text-center mb-12"
-          >
+          <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary via-white to-secondary">
               Connect Your Support System
             </h1>
             <p className="text-xl text-gray-400 mb-8">
               Start by connecting your support platform to unlock powerful insights
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={false}
-            animate={{ y: 0, opacity: 1 }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {platforms.map((platform) => (
               <div 
                 key={platform.name}
@@ -120,22 +104,18 @@ const Demo = () => {
                 </div>
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Step 2: Data Processing Animation */}
-      <motion.div
-        initial={false}
-        animate={{ opacity: step === 2 ? 1 : 0 }}
-        className={`fixed inset-0 flex items-center justify-center ${step !== 2 ? 'pointer-events-none' : ''}`}
+      <div
+        className={`fixed inset-0 flex items-center justify-center transition-opacity duration-300 ${
+          step === 2 ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
       >
         <div className="max-w-2xl mx-auto px-4 text-center">
-          <motion.div
-            initial={false}
-            animate={{ scale: 1, opacity: 1 }}
-            className="relative"
-          >
+          <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 blur-3xl" />
             <div className="relative bg-black/50 backdrop-blur-xl rounded-2xl p-8 border border-white/10">
               <div className="flex items-center justify-center mb-6">
@@ -158,9 +138,9 @@ const Demo = () => {
                 />
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };
