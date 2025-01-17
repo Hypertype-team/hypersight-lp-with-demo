@@ -73,15 +73,14 @@ const Demo = () => {
 
       {/* Step 1: Connect Support System */}
       <motion.div 
-        initial={{ opacity: 0 }}
+        initial={false}
         animate={{ opacity: step === 1 ? 1 : 0 }}
         className={`fixed inset-0 flex items-center justify-center ${step !== 1 ? 'pointer-events-none' : ''}`}
       >
         <div className="max-w-2xl mx-auto px-4">
           <motion.div
-            initial={{ y: 20, opacity: 0 }}
+            initial={false}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
             className="text-center mb-12"
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary via-white to-secondary">
@@ -93,9 +92,8 @@ const Demo = () => {
           </motion.div>
 
           <motion.div
-            initial={{ y: 20, opacity: 0 }}
+            initial={false}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.4 }}
             className="grid grid-cols-1 md:grid-cols-2 gap-6"
           >
             {platforms.map((platform) => (
@@ -128,15 +126,14 @@ const Demo = () => {
 
       {/* Step 2: Data Processing Animation */}
       <motion.div
-        initial={{ opacity: 0 }}
+        initial={false}
         animate={{ opacity: step === 2 ? 1 : 0 }}
         className={`fixed inset-0 flex items-center justify-center ${step !== 2 ? 'pointer-events-none' : ''}`}
       >
         <div className="max-w-2xl mx-auto px-4 text-center">
           <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
+            initial={false}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.2 }}
             className="relative"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 blur-3xl" />
