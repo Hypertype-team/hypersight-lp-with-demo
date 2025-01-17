@@ -2,12 +2,14 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { Check, ChevronRight, Loader2 } from "lucide-react";
+import { Check, ChevronRight, Loader2, ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Demo = () => {
   const [step, setStep] = useState(1);
   const [isConnecting, setIsConnecting] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleConnect = async () => {
     setIsConnecting(true);
@@ -21,8 +23,32 @@ const Demo = () => {
     setStep(2);
   };
 
+  const handleBack = () => {
+    if (step > 1) {
+      setStep(step - 1);
+    } else {
+      navigate('/');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background text-white">
+      {/* Back Button */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="fixed top-6 left-6 z-50"
+      >
+        <Button
+          variant="ghost"
+          onClick={handleBack}
+          className="text-white/80 hover:text-white flex items-center gap-2"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back
+        </Button>
+      </motion.div>
+
       {/* Step 1: Connect Support System */}
       <motion.div 
         initial={{ opacity: 0 }}
