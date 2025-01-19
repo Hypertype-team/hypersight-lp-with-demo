@@ -64,6 +64,7 @@ const SystemPerformanceChart = () => {
             <BarChart 
               data={chartData} 
               margin={{ top: 20, right: 30, left: 20, bottom: 70 }}
+              barGap={8}
             >
               <XAxis 
                 dataKey="category" 
@@ -97,12 +98,14 @@ const SystemPerformanceChart = () => {
                 fill="#4776e6"
                 name="Current Cycle"
                 radius={[4, 4, 0, 0]}
+                maxBarSize={40}
               />
               <Bar
                 dataKey="previousCycle"
                 fill="#9b87f5"
                 name="Previous Cycle"
                 radius={[4, 4, 0, 0]}
+                maxBarSize={40}
               />
             </BarChart>
           </ResponsiveContainer>
