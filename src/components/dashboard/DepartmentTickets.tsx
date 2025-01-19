@@ -4,18 +4,18 @@ import { format } from "date-fns";
 
 const departmentDataByCycle = {
   "2025-01-06": [
-    { name: "User Authentication & Access", tickets: 245, color: "#4776e6", percentage: "28%", trend: "↑", id: "auth" },
-    { name: "Data Integration Issues", tickets: 210, color: "#8a56e9", percentage: "24%", trend: "↓", id: "data" },
-    { name: "API Connection Errors", tickets: 155, color: "#9b87f5", percentage: "18%", trend: "→", id: "api" },
-    { name: "Performance & Loading", tickets: 132, color: "#7E69AB", percentage: "15%", trend: "→", id: "performance" },
-    { name: "Feature Requests", tickets: 128, color: "#6c5dd3", percentage: "15%", trend: "↑", id: "features" }
+    { name: "User Authentication & Access", tickets: 245, color: "#4776e6", percentage: "28", trend: "↑", id: "auth" },
+    { name: "Data Integration Issues", tickets: 210, color: "#8a56e9", percentage: "24", trend: "↓", id: "data" },
+    { name: "API Connection Errors", tickets: 155, color: "#9b87f5", percentage: "18", trend: "→", id: "api" },
+    { name: "Performance & Loading", tickets: 132, color: "#7E69AB", percentage: "15", trend: "→", id: "performance" },
+    { name: "Feature Requests", tickets: 128, color: "#6c5dd3", percentage: "15", trend: "↑", id: "features" }
   ],
   "2024-12-23": [
-    { name: "User Authentication & Access", tickets: 220, color: "#4776e6", percentage: "25%", trend: "→", id: "auth" },
-    { name: "Data Integration Issues", tickets: 235, color: "#8a56e9", percentage: "27%", trend: "↑", id: "data" },
-    { name: "API Connection Errors", tickets: 145, color: "#9b87f5", percentage: "17%", trend: "↓", id: "api" },
-    { name: "Performance & Loading", tickets: 142, color: "#7E69AB", percentage: "16%", trend: "↑", id: "performance" },
-    { name: "Feature Requests", tickets: 132, color: "#6c5dd3", percentage: "15%", trend: "→", id: "features" }
+    { name: "User Authentication & Access", tickets: 220, color: "#4776e6", percentage: "25", trend: "→", id: "auth" },
+    { name: "Data Integration Issues", tickets: 235, color: "#8a56e9", percentage: "27", trend: "↑", id: "data" },
+    { name: "API Connection Errors", tickets: 145, color: "#9b87f5", percentage: "17", trend: "↓", id: "api" },
+    { name: "Performance & Loading", tickets: 142, color: "#7E69AB", percentage: "16", trend: "↑", id: "performance" },
+    { name: "Feature Requests", tickets: 132, color: "#6c5dd3", percentage: "15", trend: "→", id: "features" }
   ]
 };
 
@@ -27,10 +27,20 @@ const DepartmentTickets = ({ currentCycleStart }: DepartmentTicketsProps) => {
   const [showAll, setShowAll] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [prevCycleKey, setPrevCycleKey] = useState<string>("");
+  const [animatingNumbers, setAnimatingNumbers] = useState<{[key: string]: number}>({});
   
   const cycleKey = format(currentCycleStart, "yyyy-MM-dd");
   const departmentData = departmentDataByCycle[cycleKey as keyof typeof departmentDataByCycle] || departmentDataByCycle["2025-01-06"];
   const displayData = showAll ? departmentData : departmentData.slice(0, 3);
+
+  useEffect(() => {
+    // Initialize animation values
+    const newAnimatingNumbers: {[key: string]: number} = {};
+    departmentData.forEach(dept => {
+      newAnimatingNumbers[dept.id] = parseInt(dept.percentage);
+    });
+    setAnimatingNumbers(newAnimatingNumbers);
+  }, [cycleKey]);
 
   useEffect(() => {
     setPrevCycleKey(cycleKey);
@@ -92,12 +102,27 @@ const DepartmentTickets = ({ currentCycleStart }: DepartmentTicketsProps) => {
                 <motion.div 
                   key={`${dept.id}-${dept.percentage}`}
                   initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  animate={{ 
+                    opacity: 1, 
+                    y: 0,
+                    transition: { duration: 0.5 }
+                  }}
                   exit={{ opacity: 0, y: -10 }}
                   className="text-2xl font-semibold relative"
                   style={{ color: dept.color }}
                 >
-                  {dept.percentage}
+                  <motion.span
+                    initial={{ opacity: 1 }}
+                    animate={{ 
+                      opacity: 1,
+                    }}
+                    transition={{ 
+                      duration: 0.5,
+                      ease: "easeOut"
+                    }}
+                  >
+                    {animatingNumbers[dept.id]}%
+                  </motion.span>
                   {getPercentageChange(dept) !== null && (
                     <motion.span
                       initial={{ opacity: 0, scale: 0.5 }}
