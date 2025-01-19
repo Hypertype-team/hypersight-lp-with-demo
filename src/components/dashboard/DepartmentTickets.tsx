@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { format } from "date-fns";
 
 const departmentDataByCycle = {
@@ -26,10 +26,15 @@ interface DepartmentTicketsProps {
 const DepartmentTickets = ({ currentCycleStart }: DepartmentTicketsProps) => {
   const [showAll, setShowAll] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [prevCycleKey, setPrevCycleKey] = useState<string>("");
   
   const cycleKey = format(currentCycleStart, "yyyy-MM-dd");
   const departmentData = departmentDataByCycle[cycleKey as keyof typeof departmentDataByCycle] || departmentDataByCycle["2025-01-06"];
   const displayData = showAll ? departmentData : departmentData.slice(0, 3);
+
+  useEffect(() => {
+    setPrevCycleKey(cycleKey);
+  }, [cycleKey]);
 
   const scrollToPriorityIssue = (id: string) => {
     const element = document.getElementById(`priority-${id}`);
@@ -37,6 +42,19 @@ const DepartmentTickets = ({ currentCycleStart }: DepartmentTicketsProps) => {
       setSelectedId(id);
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const getPercentageChange = (dept: any) => {
+    if (!prevCycleKey || prevCycleKey === cycleKey) return null;
+    const prevData = departmentDataByCycle[prevCycleKey as keyof typeof departmentDataByCycle];
+    if (!prevData) return null;
+    
+    const prevDept = prevData.find(d => d.id === dept.id);
+    if (!prevDept) return null;
+    
+    const current = parseInt(dept.percentage);
+    const previous = parseInt(prevDept.percentage);
+    return current - previous;
   };
 
   return (
@@ -70,22 +88,49 @@ const DepartmentTickets = ({ currentCycleStart }: DepartmentTicketsProps) => {
               {index + 1}.
             </span>
             <div className="flex items-start gap-4 flex-1">
-              <div 
-                className="text-2xl font-semibold"
-                style={{ color: dept.color }}
-              >
-                {dept.percentage}
-              </div>
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={`${dept.id}-${dept.percentage}`}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="text-2xl font-semibold relative"
+                  style={{ color: dept.color }}
+                >
+                  {dept.percentage}
+                  {getPercentageChange(dept) !== null && (
+                    <motion.span
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className={`absolute -top-3 -right-3 text-xs ${
+                        getPercentageChange(dept)! > 0 
+                          ? 'text-green-500' 
+                          : getPercentageChange(dept)! < 0 
+                            ? 'text-red-500' 
+                            : 'text-gray-400'
+                      }`}
+                    >
+                      {getPercentageChange(dept)! > 0 ? '+' : ''}
+                      {getPercentageChange(dept)}%
+                    </motion.span>
+                  )}
+                </motion.div>
+              </AnimatePresence>
               <div className="flex-1">
                 <div className="flex items-center gap-2">
                   <h4 className="text-sm text-gray-900 font-medium truncate">{dept.name}</h4>
-                  <span className={`text-lg ${
-                    dept.trend === "↑" ? "text-red-500" : 
-                    dept.trend === "↓" ? "text-green-500" : 
-                    "text-gray-400"
-                  }`}>
+                  <motion.span 
+                    key={`${dept.id}-${dept.trend}`}
+                    initial={{ scale: 0.5 }}
+                    animate={{ scale: 1 }}
+                    className={`text-lg ${
+                      dept.trend === "↑" ? "text-red-500" : 
+                      dept.trend === "↓" ? "text-green-500" : 
+                      "text-gray-400"
+                    }`}
+                  >
                     {dept.trend}
-                  </span>
+                  </motion.span>
                 </div>
                 <p className="text-xs text-gray-500 italic">{dept.tickets} Tickets this Cycle</p>
               </div>
