@@ -30,8 +30,9 @@ const App = () => {
             <Route path="/" element={<Index />} />
             <Route path="/demo" element={<Demo />} />
             <Route path="/setup" element={<Setup />} />
+            <Route path="/home" element={<Reports />} />
             <Route path="/reports" element={<Reports />} />
-            <Route path="/settings" element={<Reports />} /> {/* Temporarily using Reports component */}
+            <Route path="/settings" element={<Reports />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
