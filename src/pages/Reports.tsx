@@ -8,14 +8,14 @@ import { addDays, format, subDays, isAfter } from "date-fns";
 import { Button } from "@/components/ui/button";
 
 const Reports = () => {
-  const [currentCycleStart, setCurrentCycleStart] = useState(new Date(2024, 1, 26));
+  const [currentCycleStart, setCurrentCycleStart] = useState(new Date(2025, 0, 6)); // January 6th, 2025
   const [isStaringContestActive, setIsStaringContestActive] = useState(false);
   const [staringTime, setStaringTime] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [gameState, setGameState] = useState<'idle' | 'playing' | 'lost'>('idle');
   
   const cycleLength = 14;
-  const futureDataDate = new Date(2025, 0, 20);
+  const futureDataDate = new Date(2025, 0, 20); // January 20th, 2025
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
