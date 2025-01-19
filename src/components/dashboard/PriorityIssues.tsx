@@ -66,10 +66,20 @@ const priorityIssues: PriorityIssue[] = [
     urgencyLevel: "High",
     reason: "Direct impact on home comfort and system efficiency",
     description: "Critical cases of non-functioning or inefficient data integrations with questions about proper configuration and usage.",
+    detailedSummary: "Flera användare rapporterar problem med dataintegration mellan olika system. Huvudproblemet verkar vara relaterat till hur data synkroniseras mellan appen och kraftnätet. Detta leder till förseningar i uppdateringar och ibland felaktiga värden som visas för användaren. Särskilt problematiskt är det när det gäller realtidsdata och historisk information som behövs för optimering av energianvändningen.",
     department: "Operations",
+    responsibleDepartment: "Product & Tech",
     weeklyTrend: "Stable",
     totalTickets: 38,
     previousCycle: 36,
+    tickets: [
+      {
+        id: "T-003",
+        title: "Data sync failing between app and grid",
+        url: "https://app.intercom.com/tickets/T-003",
+        date: "2024-03-13"
+      }
+    ]
   },
   {
     id: "api",
@@ -77,15 +87,34 @@ const priorityIssues: PriorityIssue[] = [
     urgencyLevel: "Medium",
     reason: "Affects system efficiency and customer satisfaction",
     description: "Concerns about API reliability and efficiency in data transfer, with unclear expectations for performance.",
+    detailedSummary: "API-anslutningsproblem har identifierats som ett återkommande problem. Användare upplever timeout-fel och långsamma svarstider vid vissa API-anrop. Detta påverkar särskilt realtidsövervakning och styrning av energisystem. Problemet förvärras under perioder med hög belastning och påverkar användarnas förmåga att effektivt hantera sin energiförbrukning.",
     department: "Installation",
+    responsibleDepartment: "Backend Team",
     weeklyTrend: "Decreasing",
     totalTickets: 28,
     previousCycle: 41,
+    tickets: [
+      {
+        id: "T-004",
+        title: "API timeout during peak hours",
+        url: "https://app.intercom.com/tickets/T-004",
+        date: "2024-03-12"
+      }
+    ]
   },
 ];
 
 const PriorityIssues = () => {
+  const [expandedCards, setExpandedCards] = useState<string[]>([]);
   const [expandedTickets, setExpandedTickets] = useState<string[]>([]);
+
+  const toggleCard = (issueId: string) => {
+    setExpandedCards(prev => 
+      prev.includes(issueId) 
+        ? prev.filter(id => id !== issueId)
+        : [...prev, issueId]
+    );
+  };
 
   const toggleTickets = (issueId: string) => {
     setExpandedTickets(prev => 
@@ -131,101 +160,122 @@ const PriorityIssues = () => {
             transition={{ duration: 0.5 }}
           >
             <Card className="border-gray-200 transition-all duration-300 hover:shadow-md">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardHeader 
+                className="flex flex-row items-center justify-between space-y-0 pb-2 cursor-pointer"
+                onClick={() => toggleCard(issue.id)}
+              >
                 <div>
                   <CardTitle className="text-xl font-semibold">
                     {issue.title}
                   </CardTitle>
                   <CardDescription>
-                    Trend: {issue.weeklyTrend} ({issue.totalTickets} tickets this cycle, {issue.previousCycle} previous cycle)
+                    {issue.description}
                   </CardDescription>
                 </div>
-                <span className={`rounded-full px-3 py-1 text-sm ${
-                  issue.urgencyLevel === "High" 
-                    ? "bg-red-100 text-red-700" 
-                    : "bg-yellow-100 text-yellow-700"
-                }`}>
-                  {issue.urgencyLevel}
-                </span>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-medium text-gray-700 mb-2">Detailed Summary</h4>
-                    <p className="text-sm text-gray-600 leading-relaxed">
-                      {issue.detailedSummary}
-                    </p>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div>
-                      <p className="font-medium text-gray-700">Urgency Reason</p>
-                      <p className="text-gray-600">{issue.reason}</p>
-                    </div>
-                    <div>
-                      <p className="font-medium text-gray-700">Department</p>
-                      <p className="text-gray-600">{issue.department}</p>
-                    </div>
-                  </div>
-                  <div>
-                    <p className="font-medium text-gray-700">Responsible Department</p>
-                    <p className="text-gray-600">{issue.responsibleDepartment}</p>
-                  </div>
-                  
-                  <div className="pt-2">
-                    <Button
-                      onClick={() => toggleTickets(issue.id)}
-                      variant="outline"
-                      className="w-full justify-between hover:bg-gray-50"
-                    >
-                      View Tickets
-                      {expandedTickets.includes(issue.id) ? (
-                        <ChevronUp className="h-4 w-4" />
-                      ) : (
-                        <ChevronDown className="h-4 w-4" />
-                      )}
-                    </Button>
-                    
-                    <AnimatePresence>
-                      {expandedTickets.includes(issue.id) && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="overflow-hidden"
-                        >
-                          <div className="space-y-2 pt-4">
-                            {issue.tickets.map((ticket) => (
-                              <a
-                                key={ticket.id}
-                                href={ticket.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center justify-between p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
-                              >
-                                <div className="flex items-center gap-3">
-                                  <span className="text-sm font-medium text-gray-700">
-                                    {ticket.id}
-                                  </span>
-                                  <span className="text-sm text-gray-600">
-                                    {ticket.title}
-                                  </span>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                  <span className="text-sm text-gray-500">
-                                    {ticket.date}
-                                  </span>
-                                  <ExternalLink className="h-4 w-4 text-gray-400" />
-                                </div>
-                              </a>
-                            ))}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
+                <div className="flex items-center gap-4">
+                  <span className={`rounded-full px-3 py-1 text-sm ${
+                    issue.urgencyLevel === "High" 
+                      ? "bg-red-100 text-red-700" 
+                      : "bg-yellow-100 text-yellow-700"
+                  }`}>
+                    {issue.urgencyLevel}
+                  </span>
+                  {expandedCards.includes(issue.id) ? (
+                    <ChevronUp className="h-5 w-5 text-gray-500" />
+                  ) : (
+                    <ChevronDown className="h-5 w-5 text-gray-500" />
+                  )}
                 </div>
-              </CardContent>
+              </CardHeader>
+              <AnimatePresence>
+                {expandedCards.includes(issue.id) && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div>
+                          <h4 className="font-medium text-gray-700 mb-2">Detailed Summary</h4>
+                          <p className="text-sm text-gray-600 leading-relaxed">
+                            {issue.detailedSummary}
+                          </p>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4 text-sm">
+                          <div>
+                            <p className="font-medium text-gray-700">Urgency Reason</p>
+                            <p className="text-gray-600">{issue.reason}</p>
+                          </div>
+                          <div>
+                            <p className="font-medium text-gray-700">Department</p>
+                            <p className="text-gray-600">{issue.department}</p>
+                          </div>
+                        </div>
+                        <div>
+                          <p className="font-medium text-gray-700">Responsible Department</p>
+                          <p className="text-gray-600">{issue.responsibleDepartment}</p>
+                        </div>
+                        
+                        <div className="pt-2">
+                          <Button
+                            onClick={() => toggleTickets(issue.id)}
+                            variant="outline"
+                            className="w-full justify-between hover:bg-gray-50"
+                          >
+                            View Tickets
+                            {expandedTickets.includes(issue.id) ? (
+                              <ChevronUp className="h-4 w-4" />
+                            ) : (
+                              <ChevronDown className="h-4 w-4" />
+                            )}
+                          </Button>
+                          
+                          <AnimatePresence>
+                            {expandedTickets.includes(issue.id) && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.2 }}
+                                className="overflow-hidden"
+                              >
+                                <div className="space-y-2 pt-4">
+                                  {issue.tickets.map((ticket) => (
+                                    <a
+                                      key={ticket.id}
+                                      href={ticket.url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="flex items-center justify-between p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
+                                    >
+                                      <div className="flex items-center gap-3">
+                                        <span className="text-sm font-medium text-gray-700">
+                                          {ticket.id}
+                                        </span>
+                                        <span className="text-sm text-gray-600">
+                                          {ticket.title}
+                                        </span>
+                                      </div>
+                                      <div className="flex items-center gap-3">
+                                        <span className="text-sm text-gray-500">
+                                          {ticket.date}
+                                        </span>
+                                        <ExternalLink className="h-4 w-4 text-gray-400" />
+                                      </div>
+                                    </a>
+                                  ))}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </Card>
           </motion.div>
         ))}
