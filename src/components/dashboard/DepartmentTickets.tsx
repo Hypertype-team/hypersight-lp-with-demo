@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { format } from "date-fns";
+import DepartmentItem from "./department-tickets/DepartmentItem";
 
 const departmentDataByCycle = {
   "2025-01-06": [
@@ -27,20 +28,10 @@ const DepartmentTickets = ({ currentCycleStart }: DepartmentTicketsProps) => {
   const [showAll, setShowAll] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [prevCycleKey, setPrevCycleKey] = useState<string>("");
-  const [animatingNumbers, setAnimatingNumbers] = useState<{[key: string]: number}>({});
   
   const cycleKey = format(currentCycleStart, "yyyy-MM-dd");
   const departmentData = departmentDataByCycle[cycleKey as keyof typeof departmentDataByCycle] || departmentDataByCycle["2025-01-06"];
   const displayData = showAll ? departmentData : departmentData.slice(0, 3);
-
-  useEffect(() => {
-    // Initialize animation values
-    const newAnimatingNumbers: {[key: string]: number} = {};
-    departmentData.forEach(dept => {
-      newAnimatingNumbers[dept.id] = parseInt(dept.percentage);
-    });
-    setAnimatingNumbers(newAnimatingNumbers);
-  }, [cycleKey]);
 
   useEffect(() => {
     setPrevCycleKey(cycleKey);
@@ -54,17 +45,13 @@ const DepartmentTickets = ({ currentCycleStart }: DepartmentTicketsProps) => {
     }
   };
 
-  const getPercentageChange = (dept: any) => {
-    if (!prevCycleKey || prevCycleKey === cycleKey) return null;
+  const getPreviousPercentage = (dept: any) => {
+    if (!prevCycleKey || prevCycleKey === cycleKey) return undefined;
     const prevData = departmentDataByCycle[prevCycleKey as keyof typeof departmentDataByCycle];
-    if (!prevData) return null;
+    if (!prevData) return undefined;
     
     const prevDept = prevData.find(d => d.id === dept.id);
-    if (!prevDept) return null;
-    
-    const current = parseInt(dept.percentage);
-    const previous = parseInt(prevDept.percentage);
-    return current - previous;
+    return prevDept ? parseInt(prevDept.percentage) : undefined;
   };
 
   return (
@@ -75,92 +62,14 @@ const DepartmentTickets = ({ currentCycleStart }: DepartmentTicketsProps) => {
       </div>
       <div className="space-y-4">
         {displayData.map((dept, index) => (
-          <motion.div 
-            key={dept.name}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: index * 0.1 }}
-            whileHover={{ 
-              scale: 1.02,
-              transition: { duration: 0.2 }
-            }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => scrollToPriorityIssue(dept.id)}
-            className={`
-              flex items-start gap-4 p-2 rounded-lg 
-              cursor-pointer
-              transition-all duration-300
-              hover:bg-gray-50
-              ${selectedId === dept.id ? 'bg-gray-50 ring-2 ring-primary ring-opacity-50' : ''}
-            `}
-          >
-            <span className="text-sm font-medium text-gray-500 mt-1">
-              {index + 1}.
-            </span>
-            <div className="flex items-start gap-4 flex-1">
-              <AnimatePresence mode="wait">
-                <motion.div 
-                  key={`${dept.id}-${dept.percentage}`}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ 
-                    opacity: 1, 
-                    y: 0,
-                    transition: { duration: 0.5 }
-                  }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="text-2xl font-semibold relative"
-                  style={{ color: dept.color }}
-                >
-                  <motion.span
-                    initial={{ opacity: 1 }}
-                    animate={{ 
-                      opacity: 1,
-                    }}
-                    transition={{ 
-                      duration: 0.5,
-                      ease: "easeOut"
-                    }}
-                  >
-                    {animatingNumbers[dept.id]}%
-                  </motion.span>
-                  {getPercentageChange(dept) !== null && (
-                    <motion.span
-                      initial={{ opacity: 0, scale: 0.5 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      className={`absolute -top-3 -right-3 text-xs ${
-                        getPercentageChange(dept)! > 0 
-                          ? 'text-green-500' 
-                          : getPercentageChange(dept)! < 0 
-                            ? 'text-red-500' 
-                            : 'text-gray-400'
-                      }`}
-                    >
-                      {getPercentageChange(dept)! > 0 ? '+' : ''}
-                      {getPercentageChange(dept)}%
-                    </motion.span>
-                  )}
-                </motion.div>
-              </AnimatePresence>
-              <div className="flex-1">
-                <div className="flex items-center gap-2">
-                  <h4 className="text-sm text-gray-900 font-medium truncate">{dept.name}</h4>
-                  <motion.span 
-                    key={`${dept.id}-${dept.trend}`}
-                    initial={{ scale: 0.5 }}
-                    animate={{ scale: 1 }}
-                    className={`text-lg ${
-                      dept.trend === "↑" ? "text-red-500" : 
-                      dept.trend === "↓" ? "text-green-500" : 
-                      "text-gray-400"
-                    }`}
-                  >
-                    {dept.trend}
-                  </motion.span>
-                </div>
-                <p className="text-xs text-gray-500 italic">{dept.tickets} Tickets this Cycle</p>
-              </div>
-            </div>
-          </motion.div>
+          <DepartmentItem
+            key={dept.id}
+            {...dept}
+            index={index}
+            selectedId={selectedId}
+            previousPercentage={getPreviousPercentage(dept)}
+            onItemClick={scrollToPriorityIssue}
+          />
         ))}
       </div>
       {departmentData.length > 3 && (
