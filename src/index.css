@@ -66,11 +66,13 @@
 [data-radix-popper-content-wrapper] > div {
   background-color: white !important;
   color: #1f2937 !important;
+  font-family: 'Manrope', sans-serif !important;
 }
 
 .recharts-tooltip-wrapper {
   background-color: white !important;
   color: #1f2937 !important;
+  font-family: 'Manrope', sans-serif !important;
 }
 
 /* Additional overrides for dark mode */
@@ -88,6 +90,7 @@
   color: #1f2937 !important;
   border: 1px solid #e5e7eb !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  font-family: 'Manrope', sans-serif !important;
 }
 
 .recharts-tooltip-wrapper .recharts-default-tooltip {
@@ -96,4 +99,14 @@
 
 .recharts-tooltip-wrapper > div {
   background-color: white !important;
+}
+
+/* Additional popup overrides */
+.radix-tooltip-content,
+.radix-popover-content,
+.radix-dialog-content,
+.radix-dropdown-menu-content {
+  background-color: white !important;
+  color: #1f2937 !important;
+  font-family: 'Manrope', sans-serif !important;
 }
