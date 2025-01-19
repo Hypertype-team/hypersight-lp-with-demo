@@ -8,8 +8,12 @@ import { ChevronLeft, ChevronRight, Eye } from "lucide-react";
 import { useState, useEffect } from "react";
 import { addDays, format, subDays, isAfter } from "date-fns";
 
-const Reports = () => {
-  const [currentCycleStart, setCurrentCycleStart] = useState(() => new Date(2025, 0, 6)); // January 6th, 2025
+interface Props {
+  currentCycleStart?: Date;
+}
+
+const Reports = ({ currentCycleStart: propsCycleStart }: Props) => {
+  const [currentCycleStart, setCurrentCycleStart] = useState(() => propsCycleStart || new Date(2025, 0, 6)); // January 6th, 2025
   const [isStaringContestActive, setIsStaringContestActive] = useState(false);
   const [staringTime, setStaringTime] = useState(0);
   const [bestScore, setBestScore] = useState(0);
@@ -68,26 +72,28 @@ const Reports = () => {
 
         <div className="flex items-center justify-center mb-6">
           <div className="flex items-center gap-4">
-            <button 
+            <Button 
               onClick={handlePreviousCycle}
-              className="flex items-center gap-2 rounded-lg border px-4 py-2 text-sm hover:bg-gray-50 transition-colors"
+              variant="outline"
+              className="flex items-center gap-2"
             >
               <ChevronLeft className="h-4 w-4" />
               Previous Cycle
-            </button>
+            </Button>
             <div className="text-sm font-medium">
               Cycle: {cycleDateRange}
             </div>
-            <button 
+            <Button 
               onClick={handleNextCycle}
               disabled={isNextCycleDisabled}
-              className={`flex items-center gap-2 rounded-lg border px-4 py-2 text-sm transition-colors ${
-                isNextCycleDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50'
+              variant="outline"
+              className={`flex items-center gap-2 ${
+                isNextCycleDisabled ? 'opacity-50 cursor-not-allowed' : ''
               }`}
             >
               Next Cycle
               <ChevronRight className="h-4 w-4" />
-            </button>
+            </Button>
           </div>
         </div>
 
