@@ -39,6 +39,10 @@ export default {
           DEFAULT: "#535050",
           foreground: "#ffffff",
         },
+        popover: {
+          DEFAULT: "#ffffff",
+          foreground: "#000000",
+        },
       },
       keyframes: {
         "accordion-down": {
