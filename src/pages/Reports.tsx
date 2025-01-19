@@ -15,7 +15,7 @@ const Reports = () => {
   const [gameState, setGameState] = useState<'idle' | 'playing' | 'lost'>('idle');
   
   const cycleLength = 14;
-  const futureDataDate = new Date(2025, 0, 20); // January 20th, 2025
+  const futureDataDate = new Date(2025, 1, 3); // February 3rd, 2025
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
@@ -33,7 +33,7 @@ const Reports = () => {
 
   const handleNextCycle = () => {
     const nextDate = addDays(currentCycleStart, cycleLength);
-    if (!isAfter(nextDate, addDays(futureDataDate, cycleLength))) {
+    if (!isAfter(nextDate, addDays(futureDataDate, -cycleLength))) {
       setCurrentCycleStart(nextDate);
     }
   };
@@ -54,8 +54,8 @@ const Reports = () => {
 
   const cycleEndDate = addDays(currentCycleStart, cycleLength - 1);
   const cycleDateRange = `${format(currentCycleStart, 'MMM d')} - ${format(cycleEndDate, 'MMM d, yyyy')}`;
-  const isFutureCycle = isAfter(currentCycleStart, futureDataDate);
-  const isNextCycleDisabled = isAfter(addDays(currentCycleStart, cycleLength), addDays(futureDataDate, cycleLength));
+  const isFutureCycle = isAfter(currentCycleStart, new Date(2025, 0, 19)); // After January 19th, 2025
+  const isNextCycleDisabled = isAfter(addDays(currentCycleStart, cycleLength), addDays(futureDataDate, -cycleLength));
 
   return (
     <DashboardLayout>
@@ -96,7 +96,7 @@ const Reports = () => {
               <h2 className="text-3xl font-bold text-gray-900 mb-4">Time Travel Not Available... Yet! 🚀</h2>
               <p className="text-xl text-gray-700 leading-relaxed">
                 We get that you're excited about the future, but sorry - we're no time travelers! 
-                The reports for this cycle will be available starting January 20th, 2025.
+                The reports for this cycle will be available starting February 3rd, 2025.
               </p>
               <p className="text-lg text-gray-600 mb-8">
                 In the meantime, why not challenge our mascot Hyper in a staring contest? 
