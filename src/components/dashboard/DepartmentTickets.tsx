@@ -1,16 +1,27 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 const departmentData = [
-  { name: "User Authentication & Access", tickets: 245, color: "#4776e6", percentage: "28%", trend: "↑" },
-  { name: "Data Integration Issues", tickets: 210, color: "#8a56e9", percentage: "24%", trend: "↓" },
-  { name: "API Connection Errors", tickets: 155, color: "#9b87f5", percentage: "18%", trend: "→" },
-  { name: "Performance & Loading", tickets: 132, color: "#7E69AB", percentage: "15%", trend: "→" },
-  { name: "Feature Requests", tickets: 128, color: "#6c5dd3", percentage: "15%", trend: "↑" }
+  { name: "User Authentication & Access", tickets: 245, color: "#4776e6", percentage: "28%", trend: "↑", id: "auth" },
+  { name: "Data Integration Issues", tickets: 210, color: "#8a56e9", percentage: "24%", trend: "↓", id: "data" },
+  { name: "API Connection Errors", tickets: 155, color: "#9b87f5", percentage: "18%", trend: "→", id: "api" },
+  { name: "Performance & Loading", tickets: 132, color: "#7E69AB", percentage: "15%", trend: "→", id: "performance" },
+  { name: "Feature Requests", tickets: 128, color: "#6c5dd3", percentage: "15%", trend: "↑", id: "features" }
 ];
 
 const DepartmentTickets = () => {
   const [showAll, setShowAll] = useState(false);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
   const displayData = showAll ? departmentData : departmentData.slice(0, 3);
+
+  const scrollToPriorityIssue = (id: string) => {
+    const element = document.getElementById(`priority-${id}`);
+    if (element) {
+      setSelectedId(id);
+      element.scrollIntoView({ behavior: 'smooth' });
+      // Highlight effect will be handled by CSS
+    }
+  };
 
   return (
     <div className="rounded-xl border bg-white p-4 shadow-lg transition-all duration-200 hover:shadow-xl">
@@ -20,9 +31,24 @@ const DepartmentTickets = () => {
       </div>
       <div className="space-y-4">
         {displayData.map((dept, index) => (
-          <div 
-            key={dept.name} 
-            className="flex items-start gap-4 p-2 rounded-lg hover:bg-gray-50 transition-colors"
+          <motion.div 
+            key={dept.name}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: index * 0.1 }}
+            whileHover={{ 
+              scale: 1.02,
+              transition: { duration: 0.2 }
+            }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => scrollToPriorityIssue(dept.id)}
+            className={`
+              flex items-start gap-4 p-2 rounded-lg 
+              cursor-pointer
+              transition-all duration-300
+              hover:bg-gray-50
+              ${selectedId === dept.id ? 'bg-gray-50 ring-2 ring-primary ring-opacity-50' : ''}
+            `}
           >
             <span className="text-sm font-medium text-gray-500 mt-1">
               {index + 1}.
@@ -48,16 +74,18 @@ const DepartmentTickets = () => {
                 <p className="text-xs text-gray-500 italic">{dept.tickets} Tickets this Cycle</p>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
       {departmentData.length > 3 && (
-        <button
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           onClick={() => setShowAll(!showAll)}
           className="mt-4 text-sm text-primary hover:text-primary/80 transition-colors"
         >
           {showAll ? "Show Less" : "Show More"}
-        </button>
+        </motion.button>
       )}
     </div>
   );
