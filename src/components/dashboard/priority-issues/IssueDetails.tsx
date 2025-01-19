@@ -47,7 +47,7 @@ const IssueDetails = ({ issue, isExpanded, showTickets, onToggleTickets }: Issue
           <Button
             onClick={onToggleTickets}
             variant="outline"
-            className="w-full justify-between hover:bg-gray-50 border-primary text-primary hover:text-primary-foreground hover:bg-primary"
+            className="w-full justify-between bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 hover:border-gray-300 transition-all duration-200"
           >
             View Tickets
             {showTickets ? (
