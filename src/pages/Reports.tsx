@@ -1,5 +1,6 @@
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 import PriorityIssues from "@/components/dashboard/PriorityIssues";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const Reports = () => {
   return (
@@ -10,22 +11,29 @@ const Reports = () => {
           <p className="text-gray-600">Detailed analysis and insights from your support data</p>
         </div>
 
-        <div className="flex gap-4 mb-6">
-          <select className="rounded-lg border px-4 py-2 text-sm">
-            <option>All Departments</option>
-            <option>Product Development</option>
-            <option>Operations</option>
-            <option>Customer Support</option>
-          </select>
-          <select className="rounded-lg border px-4 py-2 text-sm">
-            <option>Last 30 Days</option>
-            <option>Last Quarter</option>
-            <option>Last Year</option>
-            <option>Custom Range</option>
-          </select>
-          <button className="rounded-lg bg-primary text-white px-4 py-2 text-sm hover:bg-primary/90 transition-colors">
-            Generate Report
-          </button>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex gap-4">
+            <select className="rounded-lg border px-4 py-2 text-sm">
+              <option>All Departments</option>
+              <option>Product Development</option>
+              <option>Operations</option>
+              <option>Customer Support</option>
+            </select>
+          </div>
+          
+          <div className="flex items-center gap-4">
+            <button className="flex items-center gap-2 rounded-lg border px-4 py-2 text-sm hover:bg-gray-50">
+              <ChevronLeft className="h-4 w-4" />
+              Previous Cycle
+            </button>
+            <div className="text-sm font-medium">
+              Cycle: Feb 26 - Mar 11, 2024
+            </div>
+            <button className="flex items-center gap-2 rounded-lg border px-4 py-2 text-sm hover:bg-gray-50">
+              Next Cycle
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
         </div>
 
         <PriorityIssues />

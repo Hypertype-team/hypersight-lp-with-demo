@@ -14,6 +14,9 @@ const priorityIssues = [
     reason: "High customer dissatisfaction and potential loss of trust in product reliability",
     description: "Customers reported concerns about battery performance, network balancing, and integration issues. Some queries highlight delays in functionality visibility within the app.",
     department: "Hardware",
+    weeklyTrend: "Increasing",
+    totalTickets: 45,
+    previousCycle: 32,
   },
   {
     title: "Heat Pump Operations",
@@ -21,6 +24,9 @@ const priorityIssues = [
     reason: "Direct impact on home comfort and system efficiency",
     description: "Critical cases of non-functioning or inefficient heat pump installations with questions about proper configuration and usage.",
     department: "Operations",
+    weeklyTrend: "Stable",
+    totalTickets: 38,
+    previousCycle: 36,
   },
   {
     title: "Solar Panel Systems",
@@ -28,6 +34,9 @@ const priorityIssues = [
     reason: "Affects system efficiency and customer satisfaction",
     description: "Concerns about installation quality and efficiency in generating power, with unclear expectations for panel performance.",
     department: "Installation",
+    weeklyTrend: "Decreasing",
+    totalTickets: 28,
+    previousCycle: 41,
   },
 ];
 
@@ -55,18 +64,20 @@ const PriorityIssues = () => {
             <option>Heat Pump</option>
             <option>Solar Panel</option>
           </select>
-          <button className="rounded-lg border px-4 py-2 text-sm">
-            Report Period
-          </button>
         </div>
       </div>
       <div className="space-y-4">
         {priorityIssues.map((issue) => (
           <Card key={issue.title} className="border-gray-200">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-xl font-semibold">
-                {issue.title}
-              </CardTitle>
+              <div>
+                <CardTitle className="text-xl font-semibold">
+                  {issue.title}
+                </CardTitle>
+                <CardDescription>
+                  Trend: {issue.weeklyTrend} ({issue.totalTickets} tickets this cycle, {issue.previousCycle} previous cycle)
+                </CardDescription>
+              </div>
               <span className={`rounded-full px-3 py-1 text-sm ${
                 issue.urgencyLevel === "High" 
                   ? "bg-red-100 text-red-700" 
