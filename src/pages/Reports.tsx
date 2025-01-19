@@ -18,13 +18,13 @@ const Reports = () => {
   const futureDataDate = new Date(2025, 0, 20);
 
   useEffect(() => {
-    let interval: number;
+    let intervalId: NodeJS.Timeout;
     if (isStaringContestActive) {
-      interval = setInterval(() => {
+      intervalId = setInterval(() => {
         setStaringTime(prev => prev + 0.1);
       }, 100);
     }
-    return () => clearInterval(interval);
+    return () => clearInterval(intervalId);
   }, [isStaringContestActive]);
 
   const handlePreviousCycle = () => {
@@ -33,7 +33,7 @@ const Reports = () => {
 
   const handleNextCycle = () => {
     const nextDate = addDays(currentCycleStart, cycleLength);
-    if (!isAfter(nextDate, futureDataDate)) {
+    if (!isAfter(nextDate, addDays(futureDataDate, cycleLength))) {
       setCurrentCycleStart(nextDate);
     }
   };
@@ -55,7 +55,7 @@ const Reports = () => {
   const cycleEndDate = addDays(currentCycleStart, cycleLength - 1);
   const cycleDateRange = `${format(currentCycleStart, 'MMM d')} - ${format(cycleEndDate, 'MMM d, yyyy')}`;
   const isFutureCycle = isAfter(currentCycleStart, futureDataDate);
-  const isNextCycleDisabled = isAfter(addDays(currentCycleStart, cycleLength), futureDataDate);
+  const isNextCycleDisabled = isAfter(addDays(currentCycleStart, cycleLength), addDays(futureDataDate, cycleLength));
 
   return (
     <DashboardLayout>
