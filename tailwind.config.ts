@@ -1,7 +1,6 @@
 import type { Config } from "tailwindcss";
 
 export default {
-  darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -22,11 +21,11 @@ export default {
         sans: ['Manrope', 'sans-serif'],
       },
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "#000000",
-        foreground: "hsl(var(--foreground))",
+        border: "#e5e7eb",
+        input: "#e5e7eb",
+        ring: "#e5e7eb",
+        background: "#ffffff",
+        foreground: "#000000",
         primary: {
           DEFAULT: "#4776e6",
           foreground: "#ffffff",
