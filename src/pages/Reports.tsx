@@ -2,20 +2,10 @@ import DashboardLayout from "@/components/layouts/DashboardLayout";
 import PriorityIssues from "@/components/dashboard/PriorityIssues";
 import DepartmentTickets from "@/components/dashboard/DepartmentTickets";
 import SystemPerformanceChart from "@/components/dashboard/SystemPerformanceChart";
-import DashboardMetrics from "@/components/dashboard/DashboardMetrics";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Eye } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { addDays, format, subDays, isAfter } from "date-fns";
-
-interface DashboardComponentProps {
-  currentCycleStart: Date;
-}
-
-// Define PriorityIssuesProps to match the component's requirements
-interface PriorityIssuesProps {
-  currentCycleStart: Date;
-}
 
 const Reports = () => {
   const [currentCycleStart, setCurrentCycleStart] = useState(() => new Date(2025, 0, 6)); // January 6th, 2025
@@ -26,16 +16,6 @@ const Reports = () => {
   
   const cycleLength = 14;
   const futureDataDate = new Date(2025, 1, 3); // February 3rd, 2025
-
-  useEffect(() => {
-    let intervalId: NodeJS.Timeout;
-    if (isStaringContestActive) {
-      intervalId = setInterval(() => {
-        setStaringTime(prev => prev + 0.1);
-      }, 100);
-    }
-    return () => clearInterval(intervalId);
-  }, [isStaringContestActive]);
 
   const handlePreviousCycle = () => {
     setCurrentCycleStart(prevDate => subDays(prevDate, cycleLength));
@@ -183,7 +163,6 @@ const Reports = () => {
           </div>
         ) : (
           <>
-            <DashboardMetrics currentCycleStart={currentCycleStart} />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <DepartmentTickets currentCycleStart={currentCycleStart} />
               <SystemPerformanceChart currentCycleStart={currentCycleStart} />

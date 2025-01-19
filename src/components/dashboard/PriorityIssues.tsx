@@ -12,6 +12,10 @@ import { PriorityIssue } from "@/types/priority-issues";
 import IssueDetails from "./priority-issues/IssueDetails";
 import IssueFilters from "./priority-issues/IssueFilters";
 
+interface PriorityIssuesProps {
+  currentCycleStart: Date;
+}
+
 const priorityIssues: PriorityIssue[] = [
   {
     id: "auth",
@@ -92,7 +96,7 @@ const priorityIssues: PriorityIssue[] = [
   }
 ];
 
-const PriorityIssues = () => {
+const PriorityIssues = ({ currentCycleStart }: PriorityIssuesProps) => {
   const [expandedCards, setExpandedCards] = useState<string[]>([]);
   const [expandedTickets, setExpandedTickets] = useState<string[]>([]);
 
