@@ -68,3 +68,20 @@
   background-color: white !important;
   color: #1f2937 !important;
 }
+
+/* Additional overrides for dark mode */
+.dark [data-radix-popper-content-wrapper] > div,
+.dark .recharts-tooltip-wrapper {
+  background-color: white !important;
+  color: #1f2937 !important;
+}
+
+/* Force white background on all tooltips and popovers */
+[role="tooltip"],
+[role="dialog"],
+.recharts-default-tooltip {
+  background-color: white !important;
+  color: #1f2937 !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
