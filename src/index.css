@@ -59,7 +59,7 @@
   }
 }
 
-/* Global overrides for all popups and tooltips */
+/* Global styles for all popups and tooltips */
 [data-radix-popper-content-wrapper],
 .recharts-tooltip-wrapper,
 [role="tooltip"],
