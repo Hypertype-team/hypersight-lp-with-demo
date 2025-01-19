@@ -99,9 +99,22 @@
 .dark .recharts-tooltip-wrapper,
 .dark [role="tooltip"],
 .dark [role="dialog"],
-.dark .recharts-default-tooltip {
-  background-color: white !important;
-  color: #1f2937 !important;
+.dark .recharts-default-tooltip,
+.dark .radix-tooltip-content,
+.dark .radix-popover-content,
+.dark .radix-dialog-content,
+.dark .radix-dropdown-menu-content,
+.dark .dialog-content,
+.dark .popover-content,
+.dark .tooltip-content,
+.dark .dropdown-content,
+.dark .select-content,
+.dark .command-dialog,
+.dark .context-menu-content,
+.dark .sheet-content {
+  background-color: #1f2937 !important;
+  color: white !important;
+  border-color: #374151 !important;
 }
 
 /* Additional specific component overrides */
@@ -123,4 +136,13 @@
   background-color: white !important;
   color: #1f2937 !important;
   font-family: 'Manrope', sans-serif !important;
+}
+
+/* Dark mode for Recharts tooltips */
+.dark .recharts-tooltip-wrapper .recharts-default-tooltip,
+.dark .recharts-tooltip-wrapper > div,
+.dark .recharts-tooltip-item,
+.dark .recharts-tooltip-label {
+  background-color: #1f2937 !important;
+  color: white !important;
 }
