@@ -27,15 +27,15 @@ const DepartmentTickets = () => {
             <span className="text-sm font-medium text-gray-500 mt-1">
               {index + 1}.
             </span>
-            <div className="flex-1">
-              <div className="flex items-center justify-between">
+            <div className="flex items-start gap-4 flex-1">
+              <div 
+                className="text-2xl font-semibold"
+                style={{ color: dept.color }}
+              >
+                {dept.percentage}
+              </div>
+              <div className="flex-1">
                 <div className="flex items-center gap-2">
-                  <span 
-                    className="text-2xl font-semibold mr-2"
-                    style={{ color: dept.color }}
-                  >
-                    {dept.percentage}
-                  </span>
                   <h4 className="text-sm text-gray-900 font-medium truncate">{dept.name}</h4>
                   <span className={`text-lg ${
                     dept.trend === "↑" ? "text-red-500" : 
@@ -45,8 +45,8 @@ const DepartmentTickets = () => {
                     {dept.trend}
                   </span>
                 </div>
+                <p className="text-xs text-gray-500 italic">{dept.tickets} Tickets this Cycle</p>
               </div>
-              <p className="text-xs text-gray-500 italic ml-1">{dept.tickets} Tickets this Cycle</p>
             </div>
           </div>
         ))}
