@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardContent,
@@ -6,19 +6,59 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-const priorityIssues = [
+interface Ticket {
+  id: string;
+  title: string;
+  url: string;
+  date: string;
+}
+
+interface PriorityIssue {
+  id: string;
+  title: string;
+  urgencyLevel: string;
+  reason: string;
+  description: string;
+  detailedSummary: string;
+  department: string;
+  responsibleDepartment: string;
+  weeklyTrend: string;
+  totalTickets: number;
+  previousCycle: number;
+  tickets: Ticket[];
+}
+
+const priorityIssues: PriorityIssue[] = [
   {
     id: "auth",
     title: "User Authentication & Access",
     urgencyLevel: "High",
     reason: "High customer dissatisfaction and potential loss of trust in product reliability",
     description: "Customers reported concerns about authentication performance, network balancing, and integration issues. Some queries highlight delays in functionality visibility within the app.",
+    detailedSummary: "Det finns flera återkommande problem relaterade till batterifunktion och anslutning till olika applikationer, särskilt Virtuellt Kraftnät och Pixii app. Många användare uttrycker osäkerhet kring batteriets funktion och har svårt med att ladda det, där påståenden om att 'batteriet går inte att ladda' förekommer flera gånger. Det finns även intermittenta anslutningsproblem och kvarstående frågor om hur batteriet ska anslutas korrekt till appen. Problemet med registrering av batteriet i appen har också noterats, liksom osäkerhet kring anslutningen av batteriet. Sammanfattningsvis pekar listan på en uppsättning av upprepade problem gällande både batteriets funktion och dess anslutningar, som påverkar användarupplevelsen negativt.",
     department: "Hardware",
+    responsibleDepartment: "Product & Tech",
     weeklyTrend: "Increasing",
     totalTickets: 45,
     previousCycle: 32,
+    tickets: [
+      {
+        id: "T-001",
+        title: "Unable to authenticate with app",
+        url: "https://app.intercom.com/tickets/T-001",
+        date: "2024-03-15"
+      },
+      {
+        id: "T-002",
+        title: "Login issues after update",
+        url: "https://app.intercom.com/tickets/T-002",
+        date: "2024-03-14"
+      }
+    ]
   },
   {
     id: "data",
@@ -45,6 +85,16 @@ const priorityIssues = [
 ];
 
 const PriorityIssues = () => {
+  const [expandedTickets, setExpandedTickets] = useState<string[]>([]);
+
+  const toggleTickets = (issueId: string) => {
+    setExpandedTickets(prev => 
+      prev.includes(issueId) 
+        ? prev.filter(id => id !== issueId)
+        : [...prev, issueId]
+    );
+  };
+
   return (
     <div className="rounded-xl border bg-white p-6 shadow-sm">
       <div className="mb-6 flex items-center justify-between">
@@ -99,16 +149,81 @@ const PriorityIssues = () => {
                 </span>
               </CardHeader>
               <CardContent>
-                <div className="space-y-2">
-                  <p className="text-sm font-medium text-gray-700">
-                    Urgency Reason: {issue.reason}
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    {issue.description}
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    Department: {issue.department}
-                  </p>
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="font-medium text-gray-700 mb-2">Detailed Summary</h4>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      {issue.detailedSummary}
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <p className="font-medium text-gray-700">Urgency Reason</p>
+                      <p className="text-gray-600">{issue.reason}</p>
+                    </div>
+                    <div>
+                      <p className="font-medium text-gray-700">Department</p>
+                      <p className="text-gray-600">{issue.department}</p>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-700">Responsible Department</p>
+                    <p className="text-gray-600">{issue.responsibleDepartment}</p>
+                  </div>
+                  
+                  <div className="pt-2">
+                    <Button
+                      onClick={() => toggleTickets(issue.id)}
+                      variant="outline"
+                      className="w-full justify-between hover:bg-gray-50"
+                    >
+                      View Tickets
+                      {expandedTickets.includes(issue.id) ? (
+                        <ChevronUp className="h-4 w-4" />
+                      ) : (
+                        <ChevronDown className="h-4 w-4" />
+                      )}
+                    </Button>
+                    
+                    <AnimatePresence>
+                      {expandedTickets.includes(issue.id) && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="space-y-2 pt-4">
+                            {issue.tickets.map((ticket) => (
+                              <a
+                                key={ticket.id}
+                                href={ticket.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center justify-between p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
+                              >
+                                <div className="flex items-center gap-3">
+                                  <span className="text-sm font-medium text-gray-700">
+                                    {ticket.id}
+                                  </span>
+                                  <span className="text-sm text-gray-600">
+                                    {ticket.title}
+                                  </span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                  <span className="text-sm text-gray-500">
+                                    {ticket.date}
+                                  </span>
+                                  <ExternalLink className="h-4 w-4 text-gray-400" />
+                                </div>
+                              </a>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 </div>
               </CardContent>
             </Card>
