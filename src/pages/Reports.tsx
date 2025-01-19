@@ -8,12 +8,8 @@ import { ChevronLeft, ChevronRight, Eye } from "lucide-react";
 import { useState, useEffect } from "react";
 import { addDays, format, subDays, isAfter } from "date-fns";
 
-interface Props {
-  currentCycleStart?: Date;
-}
-
-const Reports = ({ currentCycleStart: propsCycleStart }: Props) => {
-  const [currentCycleStart, setCurrentCycleStart] = useState(() => propsCycleStart || new Date(2025, 0, 6)); // January 6th, 2025
+const Reports = () => {
+  const [currentCycleStart, setCurrentCycleStart] = useState(() => new Date(2025, 0, 6)); // January 6th, 2025
   const [isStaringContestActive, setIsStaringContestActive] = useState(false);
   const [staringTime, setStaringTime] = useState(0);
   const [bestScore, setBestScore] = useState(0);
@@ -65,9 +61,18 @@ const Reports = ({ currentCycleStart: propsCycleStart }: Props) => {
   return (
     <DashboardLayout>
       <div className="space-y-8">
-        <div>
-          <h1 className="text-2xl font-semibold text-gray-900 mb-2">Support Analytics Reports</h1>
-          <p className="text-gray-600">Detailed analysis and insights from your support data</p>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-4">
+            <img
+              src="/lovable-uploads/99af36c9-7743-4308-adc1-ee20870b7654.png"
+              alt="Hypersight Logo"
+              className="h-8"
+            />
+            <div>
+              <h1 className="text-2xl font-semibold text-gray-900">Support Analytics Reports</h1>
+              <p className="text-gray-600">Detailed analysis and insights from your support data</p>
+            </div>
+          </div>
         </div>
 
         <div className="flex items-center justify-center mb-6">
