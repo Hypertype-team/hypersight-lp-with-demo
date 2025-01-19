@@ -39,7 +39,7 @@ const SystemPerformanceChart = () => {
             />
             <ChartTooltip 
               content={<ChartTooltipContent />}
-              wrapperClassName="rounded-lg shadow-md !bg-white !text-gray-900 border border-gray-200 p-2"
+              wrapperClassName="!rounded-lg !shadow-md !bg-white !text-gray-900 !border !border-gray-200 !p-2"
             />
             <Legend 
               verticalAlign="top"
