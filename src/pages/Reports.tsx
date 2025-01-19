@@ -2,10 +2,10 @@ import DashboardLayout from "@/components/layouts/DashboardLayout";
 import PriorityIssues from "@/components/dashboard/PriorityIssues";
 import DepartmentTickets from "@/components/dashboard/DepartmentTickets";
 import SystemPerformanceChart from "@/components/dashboard/SystemPerformanceChart";
+import DashboardMetrics from "@/components/dashboard/DashboardMetrics";
 import { ChevronLeft, ChevronRight, Eye } from "lucide-react";
 import { useState, useEffect } from "react";
 import { addDays, format, subDays, isAfter } from "date-fns";
-import { Button } from "@/components/ui/button";
 
 const Reports = () => {
   const [currentCycleStart, setCurrentCycleStart] = useState(new Date(2025, 0, 6)); // January 6th, 2025
@@ -169,11 +169,12 @@ const Reports = () => {
           </div>
         ) : (
           <>
+            <DashboardMetrics currentCycleStart={currentCycleStart} />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <DepartmentTickets />
-              <SystemPerformanceChart />
+              <DepartmentTickets currentCycleStart={currentCycleStart} />
+              <SystemPerformanceChart currentCycleStart={currentCycleStart} />
             </div>
-            <PriorityIssues />
+            <PriorityIssues currentCycleStart={currentCycleStart} />
           </>
         )}
       </div>

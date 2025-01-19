@@ -5,9 +5,15 @@ import {
 } from "@/components/ui/chart";
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Legend } from "recharts";
 import { ChartContainer } from "./charts/ChartContainer";
-import { chartConfig, mockChartData } from "./charts/ChartConfig";
+import { chartConfig, getMockChartData } from "./charts/ChartConfig";
 
-const SystemPerformanceChart = () => {
+interface SystemPerformanceChartProps {
+  currentCycleStart: Date;
+}
+
+const SystemPerformanceChart = ({ currentCycleStart }: SystemPerformanceChartProps) => {
+  const mockChartData = getMockChartData(currentCycleStart);
+
   return (
     <ChartContainer 
       title="Support Categories Comparison" 

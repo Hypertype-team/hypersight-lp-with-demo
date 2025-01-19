@@ -1,17 +1,34 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { format } from "date-fns";
 
-const departmentData = [
-  { name: "User Authentication & Access", tickets: 245, color: "#4776e6", percentage: "28%", trend: "↑", id: "auth" },
-  { name: "Data Integration Issues", tickets: 210, color: "#8a56e9", percentage: "24%", trend: "↓", id: "data" },
-  { name: "API Connection Errors", tickets: 155, color: "#9b87f5", percentage: "18%", trend: "→", id: "api" },
-  { name: "Performance & Loading", tickets: 132, color: "#7E69AB", percentage: "15%", trend: "→", id: "performance" },
-  { name: "Feature Requests", tickets: 128, color: "#6c5dd3", percentage: "15%", trend: "↑", id: "features" }
-];
+const departmentDataByCycle = {
+  "2025-01-06": [
+    { name: "User Authentication & Access", tickets: 245, color: "#4776e6", percentage: "28%", trend: "↑", id: "auth" },
+    { name: "Data Integration Issues", tickets: 210, color: "#8a56e9", percentage: "24%", trend: "↓", id: "data" },
+    { name: "API Connection Errors", tickets: 155, color: "#9b87f5", percentage: "18%", trend: "→", id: "api" },
+    { name: "Performance & Loading", tickets: 132, color: "#7E69AB", percentage: "15%", trend: "→", id: "performance" },
+    { name: "Feature Requests", tickets: 128, color: "#6c5dd3", percentage: "15%", trend: "↑", id: "features" }
+  ],
+  "2024-12-23": [
+    { name: "User Authentication & Access", tickets: 220, color: "#4776e6", percentage: "25%", trend: "→", id: "auth" },
+    { name: "Data Integration Issues", tickets: 235, color: "#8a56e9", percentage: "27%", trend: "↑", id: "data" },
+    { name: "API Connection Errors", tickets: 145, color: "#9b87f5", percentage: "17%", trend: "↓", id: "api" },
+    { name: "Performance & Loading", tickets: 142, color: "#7E69AB", percentage: "16%", trend: "↑", id: "performance" },
+    { name: "Feature Requests", tickets: 132, color: "#6c5dd3", percentage: "15%", trend: "→", id: "features" }
+  ]
+};
 
-const DepartmentTickets = () => {
+interface DepartmentTicketsProps {
+  currentCycleStart: Date;
+}
+
+const DepartmentTickets = ({ currentCycleStart }: DepartmentTicketsProps) => {
   const [showAll, setShowAll] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  
+  const cycleKey = format(currentCycleStart, "yyyy-MM-dd");
+  const departmentData = departmentDataByCycle[cycleKey as keyof typeof departmentDataByCycle] || departmentDataByCycle["2025-01-06"];
   const displayData = showAll ? departmentData : departmentData.slice(0, 3);
 
   const scrollToPriorityIssue = (id: string) => {
@@ -19,7 +36,6 @@ const DepartmentTickets = () => {
     if (element) {
       setSelectedId(id);
       element.scrollIntoView({ behavior: 'smooth' });
-      // Highlight effect will be handled by CSS
     }
   };
 
