@@ -3,6 +3,8 @@ export interface Ticket {
   title: string;
   url: string;
   date: string;
+  summary?: string;
+  issueDetails?: string;
 }
 
 export interface PriorityIssue {

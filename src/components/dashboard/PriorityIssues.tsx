@@ -28,15 +28,19 @@ const priorityIssues: PriorityIssue[] = [
     tickets: [
       {
         id: "T-001",
-        title: "Unable to authenticate with app",
+        title: "Battery functionality uncertainty and Virtual Grid connection issues",
         url: "https://app.intercom.com/tickets/T-001",
-        date: "2024-03-15"
+        date: "2024-03-15",
+        issueDetails: "Osäkerhet kring batterifunktion och anslutningsproblem med Virtuellt Kraftnät",
+        summary: "A user expressed uncertainty about their battery functionality and questioned their connection to a virtual power grid. They also mentioned issues connecting a Pixii unit due to a missing QR code and expressed concerns about their investment."
       },
       {
         id: "T-002",
-        title: "Login issues after update",
+        title: "Authentication failure during peak hours",
         url: "https://app.intercom.com/tickets/T-002",
-        date: "2024-03-14"
+        date: "2024-03-14",
+        issueDetails: "Authentication system completely unresponsive",
+        summary: "Multiple users reported complete authentication system failure during peak usage hours, preventing access to critical features."
       }
     ]
   },
@@ -57,7 +61,9 @@ const priorityIssues: PriorityIssue[] = [
         id: "T-003",
         title: "Data sync failing between app and grid",
         url: "https://app.intercom.com/tickets/T-003",
-        date: "2024-03-13"
+        date: "2024-03-13",
+        issueDetails: "Data synchronization failures",
+        summary: "Multiple instances of data synchronization failures between the app and grid system, causing inconsistent readings and user confusion."
       }
     ]
   },
@@ -78,10 +84,12 @@ const priorityIssues: PriorityIssue[] = [
         id: "T-004",
         title: "API timeout during peak hours",
         url: "https://app.intercom.com/tickets/T-004",
-        date: "2024-03-12"
+        date: "2024-03-12",
+        issueDetails: "API response delays and timeouts",
+        summary: "Users experiencing significant delays and timeouts when accessing API endpoints during peak usage hours."
       }
     ]
-  },
+  }
 ];
 
 const PriorityIssues = () => {
