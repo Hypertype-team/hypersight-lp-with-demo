@@ -62,16 +62,9 @@ const Reports = () => {
     <DashboardLayout>
       <div className="space-y-8">
         <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-4">
-            <img
-              src="/lovable-uploads/99af36c9-7743-4308-adc1-ee20870b7654.png"
-              alt="Hypersight Logo"
-              className="h-8"
-            />
-            <div>
-              <h1 className="text-2xl font-semibold text-gray-900">Support Analytics Reports</h1>
-              <p className="text-gray-600">Detailed analysis and insights from your support data</p>
-            </div>
+          <div>
+            <h1 className="text-2xl font-semibold text-gray-900">Support Analytics Reports</h1>
+            <p className="text-gray-600">Detailed analysis and insights from your support data</p>
           </div>
         </div>
 
