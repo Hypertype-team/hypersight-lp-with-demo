@@ -4,7 +4,7 @@ import DepartmentTickets from "@/components/dashboard/DepartmentTickets";
 import SystemPerformanceChart from "@/components/dashboard/SystemPerformanceChart";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Eye } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { addDays, format, subDays, isAfter } from "date-fns";
 
 const Reports = () => {
@@ -16,6 +16,18 @@ const Reports = () => {
   
   const cycleLength = 14;
   const futureDataDate = new Date(2025, 1, 3); // February 3rd, 2025
+
+  useEffect(() => {
+    let timer: number;
+    if (isStaringContestActive && gameState === 'playing') {
+      timer = window.setInterval(() => {
+        setStaringTime(prev => prev + 0.1);
+      }, 100);
+    }
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [isStaringContestActive, gameState]);
 
   const handlePreviousCycle = () => {
     setCurrentCycleStart(prevDate => subDays(prevDate, cycleLength));
