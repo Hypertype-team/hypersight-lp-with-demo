@@ -35,12 +35,15 @@ const Demo = () => {
     setIsConnecting(false);
     setConnectingPlatform(null);
     toast({
-      title: "Connection Instructions",
-      description: "For this demo, we'll simulate a successful connection. In production, you would need to enter your API key.",
+      title: "Connection Successful",
+      description: "Your account has been connected successfully. Redirecting to dashboard...",
       duration: 5000,
     });
     
-    setStep(2);
+    // Short delay before navigation
+    setTimeout(() => {
+      navigate('/reports');
+    }, 1500);
   };
 
   const handleBack = () => {
@@ -104,40 +107,6 @@ const Demo = () => {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Step 2: Data Processing Animation */}
-      <div
-        className={`fixed inset-0 flex items-center justify-center transition-opacity duration-300 ${
-          step === 2 ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        <div className="max-w-2xl mx-auto px-4 text-center">
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 blur-3xl" />
-            <div className="relative bg-black/50 backdrop-blur-xl rounded-2xl p-8 border border-white/10">
-              <div className="flex items-center justify-center mb-6">
-                <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
-                  <Check className="w-8 h-8 text-primary" />
-                </div>
-              </div>
-              <h2 className="text-2xl font-bold mb-4">Processing Your Data</h2>
-              <p className="text-gray-400 mb-6">
-                We're analyzing your support tickets to generate valuable insights.
-                This might take a few minutes...
-              </p>
-              <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
-                <motion.div
-                  className="h-full bg-gradient-to-r from-primary to-secondary"
-                  initial={{ width: "0%" }}
-                  animate={{ width: "100%" }}
-                  transition={{ duration: 3, ease: "linear" }}
-                  onAnimationComplete={() => setStep(3)}
-                />
-              </div>
-            </div>
           </div>
         </div>
       </div>
