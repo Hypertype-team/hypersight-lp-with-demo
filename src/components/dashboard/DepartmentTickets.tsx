@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const departmentData = [
   { name: "User Authentication & Access", tickets: 245, color: "#4776e6", percentage: "28%", trend: "↑" },
@@ -9,6 +9,9 @@ const departmentData = [
 ];
 
 const DepartmentTickets = () => {
+  const [showAll, setShowAll] = useState(false);
+  const displayData = showAll ? departmentData : departmentData.slice(0, 5);
+
   return (
     <div className="rounded-xl border bg-white p-4 shadow-lg transition-all duration-200 hover:shadow-xl">
       <div className="mb-4">
@@ -16,7 +19,7 @@ const DepartmentTickets = () => {
         <p className="text-xs text-gray-500">Current cycle distribution</p>
       </div>
       <div className="space-y-3">
-        {departmentData.map((dept, index) => (
+        {displayData.map((dept, index) => (
           <div 
             key={dept.name} 
             className="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 transition-colors"
@@ -42,6 +45,14 @@ const DepartmentTickets = () => {
           </div>
         ))}
       </div>
+      {departmentData.length > 5 && (
+        <button
+          onClick={() => setShowAll(!showAll)}
+          className="mt-4 text-sm text-primary hover:text-primary/80 transition-colors"
+        >
+          {showAll ? "Show Less" : "Show More"}
+        </button>
+      )}
     </div>
   );
 };

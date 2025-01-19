@@ -1,6 +1,7 @@
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 import PriorityIssues from "@/components/dashboard/PriorityIssues";
 import DepartmentTickets from "@/components/dashboard/DepartmentTickets";
+import SystemPerformanceChart from "@/components/dashboard/SystemPerformanceChart";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const Reports = () => {
@@ -28,7 +29,10 @@ const Reports = () => {
           </div>
         </div>
 
-        <DepartmentTickets />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <DepartmentTickets />
+          <SystemPerformanceChart />
+        </div>
         <PriorityIssues />
       </div>
     </DashboardLayout>
