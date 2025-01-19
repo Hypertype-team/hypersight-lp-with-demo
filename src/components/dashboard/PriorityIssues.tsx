@@ -222,7 +222,7 @@ const PriorityIssues = () => {
                           <Button
                             onClick={() => toggleTickets(issue.id)}
                             variant="outline"
-                            className="w-full justify-between hover:bg-gray-50 border-primary text-primary hover:text-primary"
+                            className="w-full justify-between hover:bg-gray-50 border-primary text-primary hover:text-primary-foreground hover:bg-primary"
                           >
                             View Tickets
                             {expandedTickets.includes(issue.id) ? (
