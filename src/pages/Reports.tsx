@@ -8,6 +8,10 @@ import { ChevronLeft, ChevronRight, Eye } from "lucide-react";
 import { useState, useEffect } from "react";
 import { addDays, format, subDays, isAfter } from "date-fns";
 
+interface DashboardComponentProps {
+  currentCycleStart: Date;
+}
+
 const Reports = () => {
   const [currentCycleStart, setCurrentCycleStart] = useState(() => new Date(2025, 0, 6)); // January 6th, 2025
   const [isStaringContestActive, setIsStaringContestActive] = useState(false);
