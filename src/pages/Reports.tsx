@@ -3,12 +3,13 @@ import PriorityIssues from "@/components/dashboard/PriorityIssues";
 import DepartmentTickets from "@/components/dashboard/DepartmentTickets";
 import SystemPerformanceChart from "@/components/dashboard/SystemPerformanceChart";
 import DashboardMetrics from "@/components/dashboard/DashboardMetrics";
+import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Eye } from "lucide-react";
 import { useState, useEffect } from "react";
 import { addDays, format, subDays, isAfter } from "date-fns";
 
 const Reports = () => {
-  const [currentCycleStart, setCurrentCycleStart] = useState(new Date(2025, 0, 6)); // January 6th, 2025
+  const [currentCycleStart, setCurrentCycleStart] = useState(() => new Date(2025, 0, 6)); // January 6th, 2025
   const [isStaringContestActive, setIsStaringContestActive] = useState(false);
   const [staringTime, setStaringTime] = useState(0);
   const [bestScore, setBestScore] = useState(0);

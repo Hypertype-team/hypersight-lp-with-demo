@@ -5,6 +5,8 @@ import DepartmentTickets from "@/components/dashboard/DepartmentTickets";
 import TeamPerformance from "@/components/dashboard/TeamPerformance";
 
 const Dashboard = () => {
+  const defaultCycleStart = new Date(2025, 0, 6); // January 6th, 2025
+
   return (
     <DashboardLayout>
       <div className="space-y-8">
@@ -13,11 +15,11 @@ const Dashboard = () => {
           <p className="text-gray-600">Welcome to your support analytics dashboard</p>
         </div>
         
-        <DashboardMetrics />
+        <DashboardMetrics currentCycleStart={defaultCycleStart} />
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <SystemPerformanceChart />
-          <DepartmentTickets />
+          <SystemPerformanceChart currentCycleStart={defaultCycleStart} />
+          <DepartmentTickets currentCycleStart={defaultCycleStart} />
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
