@@ -39,7 +39,7 @@ const priorityIssues: PriorityIssue[] = [
     urgencyLevel: "High",
     reason: "High customer dissatisfaction and potential loss of trust in product reliability",
     description: "Customers reported concerns about authentication performance, network balancing, and integration issues. Some queries highlight delays in functionality visibility within the app.",
-    detailedSummary: "Det finns flera återkommande problem relaterade till batterifunktion och anslutning till olika applikationer, särskilt Virtuellt Kraftnät och Pixii app. Många användare uttrycker osäkerhet kring batteriets funktion och har svårt med att ladda det, där påståenden om att 'batteriet går inte att ladda' förekommer flera gånger. Det finns även intermittenta anslutningsproblem och kvarstående frågor om hur batteriet ska anslutas korrekt till appen. Problemet med registrering av batteriet i appen har också noterats, liksom osäkerhet kring anslutningen av batteriet. Sammanfattningsvis pekar listan på en uppsättning av upprepade problem gällande både batteriets funktion och dess anslutningar, som påverkar användarupplevelsen negativt.",
+    detailedSummary: "Multiple users have reported persistent issues with the authentication system, particularly during peak usage hours. The problems range from delayed login responses to complete authentication failures. Users are experiencing intermittent session timeouts and difficulties with password reset workflows. The mobile app authentication seems to be more severely affected than the web platform. These issues are causing significant user frustration and impacting their ability to access critical features of the platform.",
     department: "Hardware",
     responsibleDepartment: "Product & Tech",
     weeklyTrend: "Increasing",
@@ -66,7 +66,7 @@ const priorityIssues: PriorityIssue[] = [
     urgencyLevel: "High",
     reason: "Direct impact on home comfort and system efficiency",
     description: "Critical cases of non-functioning or inefficient data integrations with questions about proper configuration and usage.",
-    detailedSummary: "Flera användare rapporterar problem med dataintegration mellan olika system. Huvudproblemet verkar vara relaterat till hur data synkroniseras mellan appen och kraftnätet. Detta leder till förseningar i uppdateringar och ibland felaktiga värden som visas för användaren. Särskilt problematiskt är det när det gäller realtidsdata och historisk information som behövs för optimering av energianvändningen.",
+    detailedSummary: "The data integration system is experiencing significant challenges with real-time synchronization between different platform components. Users are reporting delays in data updates, particularly affecting energy consumption metrics and smart device status updates. Several instances of data inconsistency have been noted, where information displayed in different parts of the system shows conflicting values. This is causing confusion among users and affecting their ability to make informed decisions about their energy usage.",
     department: "Operations",
     responsibleDepartment: "Product & Tech",
     weeklyTrend: "Stable",
@@ -87,7 +87,7 @@ const priorityIssues: PriorityIssue[] = [
     urgencyLevel: "Medium",
     reason: "Affects system efficiency and customer satisfaction",
     description: "Concerns about API reliability and efficiency in data transfer, with unclear expectations for performance.",
-    detailedSummary: "API-anslutningsproblem har identifierats som ett återkommande problem. Användare upplever timeout-fel och långsamma svarstider vid vissa API-anrop. Detta påverkar särskilt realtidsövervakning och styrning av energisystem. Problemet förvärras under perioder med hög belastning och påverkar användarnas förmåga att effektivt hantera sin energiförbrukning.",
+    detailedSummary: "The API infrastructure is showing signs of strain during high-traffic periods, resulting in increased response times and occasional timeout errors. Users are experiencing delays in data retrieval and updates, particularly when accessing historical energy consumption data. The system's real-time monitoring capabilities are being affected, with some users reporting delays of up to 30 seconds in receiving updates. These issues are most prominent during peak usage hours and are affecting the platform's ability to provide timely information to users.",
     department: "Installation",
     responsibleDepartment: "Backend Team",
     weeklyTrend: "Decreasing",
@@ -168,7 +168,7 @@ const PriorityIssues = () => {
                   <CardTitle className="text-xl font-semibold">
                     {issue.title}
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="mt-2">
                     {issue.description}
                   </CardDescription>
                 </div>
@@ -196,9 +196,9 @@ const PriorityIssues = () => {
                     transition={{ duration: 0.3 }}
                   >
                     <CardContent>
-                      <div className="space-y-4">
+                      <div className="space-y-6">
                         <div>
-                          <h4 className="font-medium text-gray-700 mb-2">Detailed Summary</h4>
+                          <h4 className="font-medium text-gray-700 mb-3">Detailed Summary</h4>
                           <p className="text-sm text-gray-600 leading-relaxed">
                             {issue.detailedSummary}
                           </p>
@@ -222,7 +222,7 @@ const PriorityIssues = () => {
                           <Button
                             onClick={() => toggleTickets(issue.id)}
                             variant="outline"
-                            className="w-full justify-between hover:bg-gray-50"
+                            className="w-full justify-between hover:bg-gray-50 border-primary text-primary hover:text-primary"
                           >
                             View Tickets
                             {expandedTickets.includes(issue.id) ? (
@@ -243,28 +243,36 @@ const PriorityIssues = () => {
                               >
                                 <div className="space-y-2 pt-4">
                                   {issue.tickets.map((ticket) => (
-                                    <a
+                                    <div
                                       key={ticket.id}
-                                      href={ticket.url}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="flex items-center justify-between p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
+                                      className="rounded-lg border border-gray-200 overflow-hidden"
                                     >
-                                      <div className="flex items-center gap-3">
-                                        <span className="text-sm font-medium text-gray-700">
-                                          {ticket.id}
-                                        </span>
-                                        <span className="text-sm text-gray-600">
-                                          {ticket.title}
-                                        </span>
+                                      <div
+                                        className="flex items-center justify-between p-3 hover:bg-gray-50 transition-colors cursor-pointer"
+                                      >
+                                        <div className="flex items-center gap-3">
+                                          <span className="text-sm font-medium text-gray-700">
+                                            {ticket.id}
+                                          </span>
+                                          <span className="text-sm text-gray-600">
+                                            {ticket.title}
+                                          </span>
+                                        </div>
+                                        <div className="flex items-center gap-3">
+                                          <span className="text-sm text-gray-500">
+                                            {ticket.date}
+                                          </span>
+                                          <a
+                                            href={ticket.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-primary hover:text-primary/80 transition-colors"
+                                          >
+                                            <ExternalLink className="h-4 w-4" />
+                                          </a>
+                                        </div>
                                       </div>
-                                      <div className="flex items-center gap-3">
-                                        <span className="text-sm text-gray-500">
-                                          {ticket.date}
-                                        </span>
-                                        <ExternalLink className="h-4 w-4 text-gray-400" />
-                                      </div>
-                                    </a>
+                                    </div>
                                   ))}
                                 </div>
                               </motion.div>
