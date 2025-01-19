@@ -12,6 +12,11 @@ interface DashboardComponentProps {
   currentCycleStart: Date;
 }
 
+// Define PriorityIssuesProps to match the component's requirements
+interface PriorityIssuesProps {
+  currentCycleStart: Date;
+}
+
 const Reports = () => {
   const [currentCycleStart, setCurrentCycleStart] = useState(() => new Date(2025, 0, 6)); // January 6th, 2025
   const [isStaringContestActive, setIsStaringContestActive] = useState(false);
