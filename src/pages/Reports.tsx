@@ -1,5 +1,6 @@
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 import PriorityIssues from "@/components/dashboard/PriorityIssues";
+import DepartmentTickets from "@/components/dashboard/DepartmentTickets";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const Reports = () => {
@@ -11,16 +12,7 @@ const Reports = () => {
           <p className="text-gray-600">Detailed analysis and insights from your support data</p>
         </div>
 
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex gap-4">
-            <select className="rounded-lg border px-4 py-2 text-sm">
-              <option>All Departments</option>
-              <option>Product Development</option>
-              <option>Operations</option>
-              <option>Customer Support</option>
-            </select>
-          </div>
-          
+        <div className="flex items-center justify-center mb-6">
           <div className="flex items-center gap-4">
             <button className="flex items-center gap-2 rounded-lg border px-4 py-2 text-sm hover:bg-gray-50">
               <ChevronLeft className="h-4 w-4" />
@@ -36,6 +28,7 @@ const Reports = () => {
           </div>
         </div>
 
+        <DepartmentTickets />
         <PriorityIssues />
       </div>
     </DashboardLayout>
