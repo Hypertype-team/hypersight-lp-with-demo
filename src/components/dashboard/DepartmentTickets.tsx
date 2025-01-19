@@ -30,7 +30,13 @@ const DepartmentTickets = () => {
             <div className="flex-1">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <h4 className="text-gray-900 font-medium">{dept.name}</h4>
+                  <span 
+                    className="text-2xl font-semibold mr-2"
+                    style={{ color: dept.color }}
+                  >
+                    {dept.percentage}
+                  </span>
+                  <h4 className="text-sm text-gray-900 font-medium truncate">{dept.name}</h4>
                   <span className={`text-lg ${
                     dept.trend === "↑" ? "text-red-500" : 
                     dept.trend === "↓" ? "text-green-500" : 
@@ -39,14 +45,8 @@ const DepartmentTickets = () => {
                     {dept.trend}
                   </span>
                 </div>
-                <span 
-                  className="text-2xl font-semibold"
-                  style={{ color: dept.color }}
-                >
-                  {dept.percentage}
-                </span>
               </div>
-              <p className="text-sm text-gray-500 italic">{dept.tickets} Tickets this Cycle</p>
+              <p className="text-xs text-gray-500 italic ml-1">{dept.tickets} Tickets this Cycle</p>
             </div>
           </div>
         ))}
