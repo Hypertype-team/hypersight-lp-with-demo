@@ -55,57 +55,71 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Manrope', sans-serif;
   }
 }
 
-/* Override for tooltips and popovers */
-[data-radix-popper-content-wrapper] {
-  background-color: white !important;
-}
-
-[data-radix-popper-content-wrapper] > div {
-  background-color: white !important;
-  color: #1f2937 !important;
-  font-family: 'Manrope', sans-serif !important;
-}
-
-.recharts-tooltip-wrapper {
-  background-color: white !important;
-  color: #1f2937 !important;
-  font-family: 'Manrope', sans-serif !important;
-}
-
-/* Additional overrides for dark mode */
-.dark [data-radix-popper-content-wrapper] > div,
-.dark .recharts-tooltip-wrapper {
-  background-color: white !important;
-  color: #1f2937 !important;
-}
-
-/* Force white background on all tooltips and popovers */
+/* Global overrides for all popups and tooltips */
+[data-radix-popper-content-wrapper],
+.recharts-tooltip-wrapper,
 [role="tooltip"],
 [role="dialog"],
-.recharts-default-tooltip {
-  background-color: white !important;
-  color: #1f2937 !important;
-  border: 1px solid #e5e7eb !important;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
-  font-family: 'Manrope', sans-serif !important;
-}
-
-.recharts-tooltip-wrapper .recharts-default-tooltip {
-  background-color: white !important;
-}
-
-.recharts-tooltip-wrapper > div {
-  background-color: white !important;
-}
-
-/* Additional popup overrides */
+.recharts-default-tooltip,
 .radix-tooltip-content,
 .radix-popover-content,
 .radix-dialog-content,
-.radix-dropdown-menu-content {
+.radix-dropdown-menu-content,
+.dialog-content,
+.popover-content,
+.tooltip-content,
+.dropdown-content,
+.select-content,
+.command-dialog,
+.context-menu-content,
+.sheet-content {
+  background-color: white !important;
+  color: #1f2937 !important;
+  font-family: 'Manrope', sans-serif !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Ensure all nested content also has correct styling */
+[data-radix-popper-content-wrapper] > div,
+.recharts-tooltip-wrapper > div,
+[role="tooltip"] > div,
+[role="dialog"] > div {
+  background-color: white !important;
+  color: #1f2937 !important;
+  font-family: 'Manrope', sans-serif !important;
+}
+
+/* Dark mode overrides */
+.dark [data-radix-popper-content-wrapper],
+.dark .recharts-tooltip-wrapper,
+.dark [role="tooltip"],
+.dark [role="dialog"],
+.dark .recharts-default-tooltip {
+  background-color: white !important;
+  color: #1f2937 !important;
+}
+
+/* Additional specific component overrides */
+.select-trigger,
+.combobox-trigger,
+.command-input,
+.dialog-title,
+.popover-trigger,
+.sheet-header,
+.alert-dialog-title {
+  font-family: 'Manrope', sans-serif !important;
+}
+
+/* Ensure Recharts tooltips are consistently styled */
+.recharts-tooltip-wrapper .recharts-default-tooltip,
+.recharts-tooltip-wrapper > div,
+.recharts-tooltip-item,
+.recharts-tooltip-label {
   background-color: white !important;
   color: #1f2937 !important;
   font-family: 'Manrope', sans-serif !important;
