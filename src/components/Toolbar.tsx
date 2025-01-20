@@ -15,18 +15,6 @@ const Toolbar = () => {
     }
   };
 
-  const handleDemoClick = () => {
-    const featuresSection = document.getElementById('features');
-    if (featuresSection && window.location.pathname === '/') {
-      featuresSection.scrollIntoView({ behavior: 'smooth' });
-      setTimeout(() => {
-        navigate('/demo');
-      }, 1000);
-    } else {
-      navigate('/demo');
-    }
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}
@@ -57,7 +45,7 @@ const Toolbar = () => {
               Pricing
             </button>
             <button 
-              onClick={handleDemoClick}
+              onClick={() => navigate('/demo')}
               className="text-white/80 hover:text-white transition-colors text-sm font-medium"
             >
               Demo
