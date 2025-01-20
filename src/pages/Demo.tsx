@@ -6,11 +6,21 @@ import { useNavigate } from "react-router-dom";
 import ReportSharing from "@/components/dashboard/ReportSharing";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
 
 const Demo = () => {
   const [isConnecting, setIsConnecting] = useState(false);
   const [connectingPlatform, setConnectingPlatform] = useState<string | null>(null);
   const [cyclePeriod, setCyclePeriod] = useState<string>("");
+  const [showDialog, setShowDialog] = useState(false);
+  const [selectedPlatform, setSelectedPlatform] = useState<string | null>(null);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -22,7 +32,12 @@ const Demo = () => {
     { name: "Salesforce", logo: "/lovable-uploads/44bc1b08-ca81-4a08-b5e1-1639878a90cf.png" },
   ];
 
-  const handleConnect = async (platform: string) => {
+  const handlePlatformSelect = (platform: string) => {
+    setSelectedPlatform(platform);
+    setShowDialog(true);
+  };
+
+  const handleConnect = async () => {
     if (!cyclePeriod) {
       toast({
         title: "Cycle Period Required",
@@ -32,12 +47,13 @@ const Demo = () => {
       return;
     }
 
+    setShowDialog(false);
     setIsConnecting(true);
-    setConnectingPlatform(platform);
+    setConnectingPlatform(selectedPlatform);
     
     toast({
       title: "API Key Required",
-      description: `Please provide your ${platform} API key to connect your account.`,
+      description: `Please provide your ${selectedPlatform} API key to connect your account.`,
       duration: 5000,
     });
 
@@ -51,7 +67,6 @@ const Demo = () => {
       duration: 5000,
     });
     
-    // Store the cycle period in localStorage or state management
     localStorage.setItem('cyclePeriod', cyclePeriod);
     navigate('/reports');
   };
@@ -60,40 +75,20 @@ const Demo = () => {
     <div className="min-h-screen bg-white text-gray-900">
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Connect Your Support System</h1>
-          <p className="text-xl text-gray-600 mb-8">
+          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent animate-gradient-shift">
+            Connect Your Support System
+          </h1>
+          <p className="text-xl text-gray-600 mb-8 animate-fade-up">
             Choose your support platform to get started
           </p>
-
-          <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-sm border mb-8">
-            <h2 className="text-lg font-semibold mb-4">Select Cycle Period</h2>
-            <RadioGroup
-              value={cyclePeriod}
-              onValueChange={setCyclePeriod}
-              className="gap-4"
-            >
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="weekly" id="weekly" />
-                <Label htmlFor="weekly">Weekly</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="biweekly" id="biweekly" />
-                <Label htmlFor="biweekly">Biweekly</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="monthly" id="monthly" />
-                <Label htmlFor="monthly">Monthly</Label>
-              </div>
-            </RadioGroup>
-          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           {platforms.map((platform) => (
             <div 
               key={platform.name}
-              onClick={() => handleConnect(platform.name)}
-              className="group relative overflow-hidden rounded-xl bg-white p-6 hover:shadow-lg transition-shadow cursor-pointer border border-gray-200"
+              onClick={() => handlePlatformSelect(platform.name)}
+              className="group relative overflow-hidden rounded-xl bg-white p-6 hover:shadow-lg transition-all duration-300 cursor-pointer border border-gray-200 animate-fade-up hover:scale-105 hover:border-primary/50"
             >
               <div className="flex items-center gap-4">
                 <img
@@ -112,6 +107,59 @@ const Demo = () => {
             </div>
           ))}
         </div>
+
+        <Dialog open={showDialog} onOpenChange={setShowDialog}>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>Select Reporting Cycle</DialogTitle>
+              <DialogDescription>
+                Choose how often you'd like to receive reports from {selectedPlatform}
+              </DialogDescription>
+            </DialogHeader>
+            <div className="p-4">
+              <RadioGroup
+                value={cyclePeriod}
+                onValueChange={setCyclePeriod}
+                className="gap-4"
+              >
+                <div className="flex items-center space-x-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
+                  <RadioGroupItem value="weekly" id="weekly" />
+                  <Label htmlFor="weekly" className="text-sm font-medium cursor-pointer">
+                    Weekly Reports
+                  </Label>
+                </div>
+                <div className="flex items-center space-x-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
+                  <RadioGroupItem value="biweekly" id="biweekly" />
+                  <Label htmlFor="biweekly" className="text-sm font-medium cursor-pointer">
+                    Biweekly Reports
+                  </Label>
+                </div>
+                <div className="flex items-center space-x-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
+                  <RadioGroupItem value="monthly" id="monthly" />
+                  <Label htmlFor="monthly" className="text-sm font-medium cursor-pointer">
+                    Monthly Reports
+                  </Label>
+                </div>
+              </RadioGroup>
+            </div>
+            <DialogFooter>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setShowDialog(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                type="button"
+                onClick={handleConnect}
+                disabled={!cyclePeriod}
+              >
+                Connect
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
 
         <div className="mt-8">
           <ReportSharing />
