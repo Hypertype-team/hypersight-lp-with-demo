@@ -23,7 +23,7 @@ const SystemPerformanceChart = ({ currentCycleStart }: SystemPerformanceChartPro
         <ResponsiveContainer width="100%" height="100%">
           <BarChart 
             data={mockChartData} 
-            margin={{ top: 20, right: 30, left: 20, bottom: 70 }}
+            margin={{ top: 20, right: 30, left: 20, bottom: 90 }}
             barGap={8}
           >
             <XAxis 
@@ -32,8 +32,8 @@ const SystemPerformanceChart = ({ currentCycleStart }: SystemPerformanceChartPro
               axisLine={true}
               angle={-45}
               textAnchor="end"
-              height={70}
-              dy={35}
+              height={90}
+              dy={40}
               tick={{ fill: '#6b7280', fontSize: 12 }}
             />
             <YAxis 
