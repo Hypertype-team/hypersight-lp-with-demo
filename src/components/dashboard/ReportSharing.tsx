@@ -13,7 +13,7 @@ const ReportSharing = () => {
         <Button
           size="sm"
           className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white"
-          onClick={() => window.open('https://hypertype.fillout.com/talktosales?_gl=1*fyovem*_gcl_au*MTQxOTAzNDA1OC4xNzMxNTgzNTYz', '_blank')}
+          onClick={() => window.open('https://hypertype.fillout.com/talktosales?_gl=1*1l6xcu7*_gcl_au*MTQxOTAzNDA1OC4xNzMxNTgzNTYz', '_blank')}
         >
           <MessageSquare className="mr-2 h-3 w-3" />
           Contact Sales
