@@ -72,6 +72,7 @@ const HeroSection = () => {
           </motion.div>
 
           {/* Logos Section */}
+
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -79,16 +80,17 @@ const HeroSection = () => {
             className="mt-8 md:mt-16"
           >
             <p className="text-base md:text-lg text-gray-400 mb-6 md:mb-8">As seen in and backed by</p>
-            <div className="flex flex-wrap justify-center gap-6 md:gap-8 items-center max-w-6xl mx-auto px-4">
-              <img src="/lovable-uploads/4d30b938-fed0-47b5-8014-6116fe6fa1db.png" alt="Wired" className="h-12 md:h-16 w-auto object-contain opacity-50 hover:opacity-75 transition-opacity" />
-              <img src="/lovable-uploads/40696f0c-0512-453e-81d7-823afb5b0525.png" alt="Breakit" className="h-12 md:h-16 w-auto object-contain opacity-50 hover:opacity-75 transition-opacity" />
-              <img src="/lovable-uploads/2d335a7f-ab0e-4913-a639-863a380fa80c.png" alt="Di digital" className="h-12 md:h-16 w-auto object-contain opacity-50 hover:opacity-75 transition-opacity" />
-              <img src="/lovable-uploads/3f22f212-acc6-460e-96b0-fbf9f0cdd08f.png" alt="Tech.eu" className="h-12 md:h-16 w-auto object-contain opacity-50 hover:opacity-75 transition-opacity" />
-              <img src="/lovable-uploads/a6fa5011-77ea-48e8-bf98-3799ce5b016e.png" alt="Luminar Ventures" className="h-12 md:h-16 w-auto object-contain opacity-50 hover:opacity-75 transition-opacity" />
-              <img src="/lovable-uploads/a80c2b3d-8898-478b-8798-73180313c739.png" alt="Sting" className="h-12 md:h-16 w-auto object-contain opacity-50 hover:opacity-75 transition-opacity" />
-              <img src="/lovable-uploads/b8098f2a-7fc5-40fe-b1d9-9384a3da29ce.png" alt="Antler" className="h-12 md:h-16 w-auto object-contain opacity-50 hover:opacity-75 transition-opacity" />
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 max-w-6xl mx-auto">
+              <img src="/lovable-uploads/4d30b938-fed0-47b5-8014-6116fe6fa1db.png" alt="Wired" className="h-10 md:h-14 w-auto object-contain opacity-50 hover:opacity-75 transition-opacity" />
+              <img src="/lovable-uploads/40696f0c-0512-453e-81d7-823afb5b0525.png" alt="Breakit" className="h-10 md:h-14 w-auto object-contain opacity-50 hover:opacity-75 transition-opacity" />
+              <img src="/lovable-uploads/2d335a7f-ab0e-4913-a639-863a380fa80c.png" alt="Di digital" className="h-10 md:h-14 w-auto object-contain opacity-50 hover:opacity-75 transition-opacity" />
+              <img src="/lovable-uploads/3f22f212-acc6-460e-96b0-fbf9f0cdd08f.png" alt="Tech.eu" className="h-10 md:h-14 w-auto object-contain opacity-50 hover:opacity-75 transition-opacity" />
+              <img src="/lovable-uploads/a6fa5011-77ea-48e8-bf98-3799ce5b016e.png" alt="Luminar Ventures" className="h-10 md:h-14 w-auto object-contain opacity-50 hover:opacity-75 transition-opacity" />
+              <img src="/lovable-uploads/a80c2b3d-8898-478b-8798-73180313c739.png" alt="Sting" className="h-10 md:h-14 w-auto object-contain opacity-50 hover:opacity-75 transition-opacity" />
+              <img src="/lovable-uploads/b8098f2a-7fc5-40fe-b1d9-9384a3da29ce.png" alt="Antler" className="h-10 md:h-14 w-auto object-contain opacity-50 hover:opacity-75 transition-opacity" />
             </div>
           </motion.div>
+
         </motion.div>
       </div>
     </section>
