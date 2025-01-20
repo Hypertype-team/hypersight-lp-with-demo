@@ -4,23 +4,10 @@ import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ReportSharing from "@/components/dashboard/ReportSharing";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-} from "@/components/ui/dialog";
 
 const Demo = () => {
   const [isConnecting, setIsConnecting] = useState(false);
   const [connectingPlatform, setConnectingPlatform] = useState<string | null>(null);
-  const [cyclePeriod, setCyclePeriod] = useState<string>("");
-  const [showDialog, setShowDialog] = useState(false);
-  const [selectedPlatform, setSelectedPlatform] = useState<string | null>(null);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -32,28 +19,13 @@ const Demo = () => {
     { name: "Salesforce", logo: "/lovable-uploads/44bc1b08-ca81-4a08-b5e1-1639878a90cf.png" },
   ];
 
-  const handlePlatformSelect = (platform: string) => {
-    setSelectedPlatform(platform);
-    setShowDialog(true);
-  };
-
-  const handleConnect = async () => {
-    if (!cyclePeriod) {
-      toast({
-        title: "Cycle Period Required",
-        description: "Please select a cycle period before connecting.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setShowDialog(false);
+  const handlePlatformSelect = async (platform: string) => {
     setIsConnecting(true);
-    setConnectingPlatform(selectedPlatform);
+    setConnectingPlatform(platform);
     
     toast({
       title: "API Key Required",
-      description: `Please provide your ${selectedPlatform} API key to connect your account.`,
+      description: `Please provide your ${platform} API key to connect your account.`,
       duration: 5000,
     });
 
@@ -67,7 +39,6 @@ const Demo = () => {
       duration: 5000,
     });
     
-    localStorage.setItem('cyclePeriod', cyclePeriod);
     navigate('/reports');
   };
 
@@ -107,59 +78,6 @@ const Demo = () => {
             </div>
           ))}
         </div>
-
-        <Dialog open={showDialog} onOpenChange={setShowDialog}>
-          <DialogContent className="sm:max-w-md">
-            <DialogHeader>
-              <DialogTitle>Select Reporting Cycle</DialogTitle>
-              <DialogDescription>
-                Choose how often you'd like to receive reports from {selectedPlatform}
-              </DialogDescription>
-            </DialogHeader>
-            <div className="p-4">
-              <RadioGroup
-                value={cyclePeriod}
-                onValueChange={setCyclePeriod}
-                className="gap-4"
-              >
-                <div className="flex items-center space-x-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
-                  <RadioGroupItem value="weekly" id="weekly" />
-                  <Label htmlFor="weekly" className="text-sm font-medium cursor-pointer">
-                    Weekly Reports
-                  </Label>
-                </div>
-                <div className="flex items-center space-x-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
-                  <RadioGroupItem value="biweekly" id="biweekly" />
-                  <Label htmlFor="biweekly" className="text-sm font-medium cursor-pointer">
-                    Biweekly Reports
-                  </Label>
-                </div>
-                <div className="flex items-center space-x-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
-                  <RadioGroupItem value="monthly" id="monthly" />
-                  <Label htmlFor="monthly" className="text-sm font-medium cursor-pointer">
-                    Monthly Reports
-                  </Label>
-                </div>
-              </RadioGroup>
-            </div>
-            <DialogFooter>
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setShowDialog(false)}
-              >
-                Cancel
-              </Button>
-              <Button
-                type="button"
-                onClick={handleConnect}
-                disabled={!cyclePeriod}
-              >
-                Connect
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
 
         <div className="mt-8">
           <ReportSharing />
