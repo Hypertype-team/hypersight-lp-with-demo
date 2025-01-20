@@ -109,68 +109,6 @@ const priorityIssues: PriorityIssue[] = [
         summary: "Security team at FinCorp unable to track failed authentication attempts in audit logs. Investigation reveals gaps in failed login event capturing. Compliance impact: Unable to meet SOC 2 requirements for authentication monitoring."
       }
     ]
-  },
-  {
-    id: "auth-compliance",
-    title: "Authentication Compliance Violations",
-    urgencyLevel: "High",
-    reason: "Multiple compliance violations in authentication processes",
-    description: "Critical compliance violations detected in authentication workflows affecting regulated industry clients.",
-    detailedSummary: "Security audit revealed multiple compliance violations in authentication processes affecting financial and healthcare clients. Issues include: 1) Insufficient password complexity enforcement, 2) Lack of proper audit trails for privileged access, 3) Non-compliant session timeout settings, 4) Missing encryption for stored credentials. These violations put several enterprise clients at risk of regulatory non-compliance.",
-    department: "Security",
-    responsibleDepartment: "Compliance & Risk Management",
-    weeklyTrend: "Increasing",
-    totalTickets: 45,
-    previousCycle: 30,
-    tickets: [
-      {
-        id: "COMP-001",
-        title: "Password Policy Violation",
-        url: "https://app.intercom.com/tickets/COMP-001",
-        date: "2024-03-19",
-        issueDetails: "Password policies not meeting HIPAA requirements for healthcare clients",
-        summary: "Healthcare clients reporting that password complexity requirements don't meet HIPAA standards. Current policy allows passwords below minimum length and complexity requirements. Impact: Risk of non-compliance affecting 5 major healthcare providers."
-      },
-      {
-        id: "COMP-002",
-        title: "Session Timeout Non-Compliance",
-        url: "https://app.intercom.com/tickets/COMP-002",
-        date: "2024-03-18",
-        issueDetails: "Session timeout settings violating financial industry regulations",
-        summary: "Financial sector clients reporting that session timeout settings exceed regulatory requirements. Current settings allow sessions to remain active beyond permitted durations. Affecting compliance with FINRA regulations for 3 major banking clients."
-      }
-    ]
-  },
-  {
-    id: "auth-performance",
-    title: "Authentication System Performance",
-    urgencyLevel: "High",
-    reason: "Severe performance degradation in authentication services",
-    description: "Enterprise clients experiencing significant delays and timeouts during authentication processes.",
-    detailedSummary: "Authentication system performance has degraded significantly, affecting login times and session management across all enterprise clients. Key issues include: 1) Login attempts taking >30 seconds to complete, 2) Frequent timeouts during SSO handshakes, 3) High latency in token validation processes, 4) Database connection pool exhaustion during peak hours. Multiple enterprise clients reporting business impact due to these performance issues.",
-    department: "Security",
-    responsibleDepartment: "Platform Engineering",
-    weeklyTrend: "Increasing",
-    totalTickets: 38,
-    previousCycle: 25,
-    tickets: [
-      {
-        id: "PERF-001",
-        title: "Authentication Service Latency",
-        url: "https://app.intercom.com/tickets/PERF-001",
-        date: "2024-03-19",
-        issueDetails: "Severe latency in authentication service response times",
-        summary: "Multiple enterprise clients reporting authentication attempts taking >30 seconds to complete. Performance metrics show 500% increase in average response time. Root cause analysis indicates potential memory leaks in authentication service. Impact: Affecting productivity of over 10,000 users across various enterprises."
-      },
-      {
-        id: "PERF-002",
-        title: "Token Validation Performance",
-        url: "https://app.intercom.com/tickets/PERF-002",
-        date: "2024-03-18",
-        issueDetails: "Token validation processes causing significant delays",
-        summary: "Token validation operations experiencing severe performance degradation. Average validation time increased from 100ms to 2s. Investigation shows database connection pool saturation during peak hours. Critical impact on real-time operations for enterprise clients."
-      }
-    ]
   }
 ];
 
