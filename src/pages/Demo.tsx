@@ -11,11 +11,11 @@ const Demo = () => {
   const navigate = useNavigate();
 
   const platforms = [
-    { name: "Zendesk", logo: "/lovable-uploads/ac09c7d8-1ea4-4b5c-805e-1c06a08a158d.png" },
-    { name: "Intercom", logo: "/lovable-uploads/0d49ea4a-140e-4f5c-9274-eb01ad8c50f2.png" },
-    { name: "Freshdesk", logo: "/lovable-uploads/7e7127fb-d7da-47c0-828d-fc1724b0c7f3.png" },
-    { name: "HubSpot", logo: "/lovable-uploads/82dfe857-3fff-4bc7-92d4-ae7f3829c15d.png" },
-    { name: "Salesforce", logo: "/lovable-uploads/14e8106c-3784-42e4-a732-6674b1e928e7.png" },
+    { name: "Zendesk", logo: "/lovable-uploads/62919e1e-3c27-42c2-b50a-ea9cdc0f3b32.png" },
+    { name: "Intercom", logo: "/lovable-uploads/cf09e092-5b2f-463b-a672-412bd05e8d2b.png" },
+    { name: "Freshdesk", logo: "/lovable-uploads/53c5ac88-9160-48e1-9bec-8ea19182fc9d.png" },
+    { name: "HubSpot", logo: "/lovable-uploads/280302d9-6a01-4d19-87c3-7ec069e94cf7.png" },
+    { name: "Salesforce", logo: "/lovable-uploads/44bc1b08-ca81-4a08-b5e1-1639878a90cf.png" },
   ];
 
   const handleConnect = async (platform: string) => {
