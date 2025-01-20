@@ -13,7 +13,7 @@ export const ChartContainer = ({ title, subtitle, children }: ChartContainerProp
         <h3 className="text-xl font-semibold text-gray-800">{title}</h3>
         <p className="mt-1 text-sm text-gray-500">{subtitle}</p>
       </div>
-      <div className="relative w-full min-h-[300px] md:min-h-[400px]">
+      <div className="relative aspect-[16/9] w-full max-h-[400px]">
         {children}
       </div>
     </div>
