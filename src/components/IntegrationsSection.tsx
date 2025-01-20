@@ -18,7 +18,7 @@ const IntegrationsSection = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="relative"
+            className="relative order-2 lg:order-1"
           >
             <div className="relative w-full max-w-[500px] aspect-square mx-auto flex items-center justify-center">
               {/* Center Hypersight logo */}
@@ -40,7 +40,7 @@ const IntegrationsSection = () => {
               {/* Integration logos in a circle */}
               {integrations.map((integration, index) => {
                 const angle = (index * 360) / integrations.length;
-                const radius = 160; // Reduced radius for tighter spacing
+                const radius = 160;
                 const x = radius * Math.cos((angle - 90) * (Math.PI / 180));
                 const y = radius * Math.sin((angle - 90) * (Math.PI / 180));
 
@@ -102,32 +102,47 @@ const IntegrationsSection = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-left space-y-6"
+            className="text-left space-y-6 order-1 lg:order-2 px-4 lg:px-0"
           >
-            <h2 className="text-4xl font-bold bg-gradient-to-r from-[#9b87f5] to-[#7E69AB] bg-clip-text text-transparent">
+            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#9b87f5] to-[#7E69AB] bg-clip-text text-transparent text-center lg:text-left">
               Connect Your Support Stack
             </h2>
             <div className="space-y-4">
-              <p className="text-xl text-white/70 leading-relaxed">
+              <p className="text-lg md:text-xl text-white/70 leading-relaxed text-center lg:text-left">
                 Seamlessly integrate Hypersight with your existing support tools. Our platform works instantly with leading solutions like Zendesk, Intercom, Freshdesk, HubSpot, and Salesforce.
               </p>
-              <p className="text-xl text-white/70 leading-relaxed">
+              <p className="text-lg md:text-xl text-white/70 leading-relaxed text-center lg:text-left">
                 Don't see your tool? No problem. Our flexible API allows for custom integrations with any support platform you use.
               </p>
             </div>
-            <ul className="space-y-4 text-white/70">
-              <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 rounded-full bg-[#9b87f5]" />
-                <span>One-click integration setup</span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 rounded-full bg-[#9b87f5]" />
-                <span>Real-time data synchronization</span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 rounded-full bg-[#9b87f5]" />
-                <span>No coding required</span>
-              </li>
+            <ul className="space-y-6 text-white/70 max-w-md mx-auto lg:mx-0">
+              <motion.li 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="flex items-center space-x-4 bg-[#1A1F2C] p-4 rounded-lg border border-[#9b87f5]/20"
+              >
+                <div className="w-3 h-3 rounded-full bg-[#9b87f5] animate-pulse" />
+                <span className="text-lg">One-click integration setup</span>
+              </motion.li>
+              <motion.li 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="flex items-center space-x-4 bg-[#1A1F2C] p-4 rounded-lg border border-[#9b87f5]/20"
+              >
+                <div className="w-3 h-3 rounded-full bg-[#9b87f5] animate-pulse" />
+                <span className="text-lg">Real-time data synchronization</span>
+              </motion.li>
+              <motion.li 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="flex items-center space-x-4 bg-[#1A1F2C] p-4 rounded-lg border border-[#9b87f5]/20"
+              >
+                <div className="w-3 h-3 rounded-full bg-[#9b87f5] animate-pulse" />
+                <span className="text-lg">No coding required</span>
+              </motion.li>
             </ul>
           </motion.div>
         </div>
