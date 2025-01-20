@@ -21,76 +21,92 @@ const priorityIssues: PriorityIssue[] = [
     id: "auth",
     title: "User Authentication & Access",
     urgencyLevel: "High",
-    reason: "Critical system access issues affecting multiple enterprise customers",
-    description: "Multiple enterprise customers reporting authentication failures and intermittent access issues across platform features.",
-    detailedSummary: "Enterprise customers are experiencing significant authentication challenges, particularly during peak business hours. Issues include session timeouts, MFA verification delays, and inconsistent access to critical features. Several high-priority clients have reported that these issues are impacting their operations and team productivity. The mobile app authentication is particularly affected, with users reporting longer than usual login times and occasional complete authentication failures.",
+    reason: "Critical authentication system failures affecting enterprise SSO integrations",
+    description: "Multiple enterprise customers experiencing severe authentication issues including SSO failures, MFA delays, and session management problems.",
+    detailedSummary: "Enterprise customers are reporting widespread authentication challenges affecting their entire organizations. Issues include: 1) Failed SSO integrations preventing team access, 2) Multi-factor authentication delays of up to 10 minutes, 3) Unexpected session timeouts during critical operations, 4) Inconsistent role-based access control enforcement. Several Fortune 500 clients have escalated these issues as business-critical, citing significant productivity impact.",
     department: "Security",
-    responsibleDepartment: "Platform Engineering",
+    responsibleDepartment: "Identity & Access Management",
     weeklyTrend: "Increasing",
     totalTickets: 52,
     previousCycle: 38,
     tickets: [
       {
-        id: "SEC-001",
+        id: "AUTH-001",
         title: "Enterprise SSO Integration Failure",
-        url: "https://app.intercom.com/tickets/SEC-001",
+        url: "https://app.intercom.com/tickets/AUTH-001",
         date: "2024-03-18",
-        issueDetails: "Critical SSO authentication failure affecting multiple enterprise users",
-        summary: "Multiple users from Enterprise client ABC Corp reporting complete SSO authentication failure. Users unable to access the platform through their corporate SSO integration. Initial investigation suggests potential SAML configuration issue."
+        issueDetails: "Complete SSO authentication failure for Acme Corp (Enterprise Plan)",
+        summary: "Acme Corp (500+ users) reporting complete SSO authentication failure since system upgrade. Error logs show SAML assertion validation errors and timeout issues during authentication attempts. Impact: Entire organization unable to access platform through corporate SSO."
       },
       {
-        id: "SEC-002",
-        title: "MFA Verification Delays",
-        url: "https://app.intercom.com/tickets/SEC-002",
+        id: "AUTH-002",
+        title: "Critical MFA System Degradation",
+        url: "https://app.intercom.com/tickets/AUTH-002",
         date: "2024-03-17",
-        issueDetails: "Significant delays in MFA code delivery and verification",
-        summary: "Users experiencing delays of up to 5 minutes in receiving MFA codes. Some users report codes expiring before they arrive. Issue appears to be affecting both SMS and email delivery methods."
-      }
-    ]
-  },
-  {
-    id: "data",
-    title: "Data Integration Issues",
-    urgencyLevel: "High",
-    reason: "Data inconsistencies affecting customer reporting and analytics",
-    description: "Widespread data synchronization issues causing discrepancies in customer analytics and reporting dashboards.",
-    detailedSummary: "Multiple customers are reporting significant delays and inconsistencies in their data synchronization processes. This is causing discrepancies between real-time data displays and generated reports. The issue is particularly impacting customers who rely on our platform for critical business analytics and decision-making. Several enterprise clients have reported that these inconsistencies are affecting their ability to make data-driven decisions and track key performance metrics.",
-    department: "Data Engineering",
-    responsibleDepartment: "Data Platform",
-    weeklyTrend: "Stable",
-    totalTickets: 43,
-    previousCycle: 41,
-    tickets: [
+        issueDetails: "Severe delays in MFA processing affecting multiple enterprise clients",
+        summary: "Multiple enterprise clients reporting 5-10 minute delays in MFA code delivery. Issue affects both SMS and email delivery methods. Root cause analysis suggests potential bottleneck in MFA service queue processing. Several timeout errors recorded in monitoring systems."
+      },
       {
-        id: "DATA-001",
-        title: "Real-time Analytics Delay",
-        url: "https://app.intercom.com/tickets/DATA-001",
+        id: "AUTH-003",
+        title: "RBAC Permission Sync Failure",
+        url: "https://app.intercom.com/tickets/AUTH-003",
         date: "2024-03-16",
-        issueDetails: "Significant lag in real-time analytics updates",
-        summary: "Enterprise customer XYZ Industries reporting 30+ minute delays in their real-time analytics dashboard updates. Critical business metrics are not reflecting current operations, impacting decision-making processes."
+        issueDetails: "Role-based access control synchronization issues",
+        summary: "TechCorp reporting critical issues with RBAC permissions not properly synchronizing after user role updates. Admin changes to user permissions taking up to 1 hour to propagate. Security concern: Some users temporarily retaining access to restricted areas after role downgrades."
       }
     ]
   },
   {
-    id: "api",
-    title: "API Performance Issues",
-    urgencyLevel: "Medium",
-    reason: "Degraded API response times impacting application performance",
-    description: "Increasing reports of API latency and occasional timeout errors during peak usage periods.",
-    detailedSummary: "Users are experiencing degraded performance when accessing certain API endpoints, particularly during high-traffic periods. Response times have increased significantly for some operations, with occasional timeout errors being reported. The issues are most pronounced during peak business hours and are affecting the overall user experience of the platform. Several customers have reported that these delays are impacting their workflow efficiency.",
-    department: "Backend",
-    responsibleDepartment: "Platform Engineering",
-    weeklyTrend: "Decreasing",
-    totalTickets: 31,
-    previousCycle: 45,
+    id: "auth-mobile",
+    title: "Mobile Authentication Issues",
+    urgencyLevel: "High",
+    reason: "Persistent mobile app authentication failures and session handling problems",
+    description: "Enterprise users experiencing significant issues with mobile app authentication, including biometric verification failures and token refresh problems.",
+    detailedSummary: "The mobile application is experiencing critical authentication challenges specifically affecting enterprise users. Key issues include: 1) Biometric authentication failures on iOS devices, 2) Persistent token refresh errors causing frequent logouts, 3) Sync issues between mobile and web sessions. Multiple enterprise clients have reported these issues as severely impacting their mobile workforce productivity.",
+    department: "Security",
+    responsibleDepartment: "Mobile Platform Security",
+    weeklyTrend: "Stable",
+    totalTickets: 34,
+    previousCycle: 32,
     tickets: [
       {
-        id: "API-001",
-        title: "Bulk Operation Timeouts",
-        url: "https://app.intercom.com/tickets/API-001",
-        date: "2024-03-15",
-        issueDetails: "Bulk API operations timing out during peak hours",
-        summary: "Multiple customers reporting timeout errors when performing bulk operations through the API. Operations affected include batch data updates and mass record retrievals. Issue appears to be correlated with high system load during business hours."
+        id: "MAUTH-001",
+        title: "iOS Biometric Authentication Failure",
+        url: "https://app.intercom.com/tickets/MAUTH-001",
+        date: "2024-03-18",
+        issueDetails: "Face ID and Touch ID authentication consistently failing on iOS devices",
+        summary: "Enterprise users on iOS devices reporting consistent failures with biometric authentication. Face ID and Touch ID attempts resulting in fallback to password entry. Issue affecting iOS 16+ devices specifically. Impact: Significant reduction in mobile access efficiency for field teams."
+      },
+      {
+        id: "MAUTH-002",
+        title: "Mobile Session Token Refresh Issues",
+        url: "https://app.intercom.com/tickets/MAUTH-002",
+        date: "2024-03-17",
+        issueDetails: "Frequent session timeouts and token refresh failures in mobile app",
+        summary: "Users experiencing unexpected logouts and session terminations in mobile app. Token refresh mechanism failing to maintain session continuity. Analysis shows potential race condition in token refresh logic. Critical impact on mobile workforce requiring constant re-authentication."
+      }
+    ]
+  },
+  {
+    id: "auth-audit",
+    title: "Authentication Audit Log Discrepancies",
+    urgencyLevel: "Medium",
+    reason: "Missing and incomplete authentication audit trails",
+    description: "Security teams reporting gaps in authentication audit logs, impacting compliance requirements and security investigations.",
+    detailedSummary: "Enterprise security teams have identified significant gaps in authentication audit logging. Issues include: 1) Missing failed login attempts in audit trails, 2) Incomplete session termination logs, 3) Delayed synchronization of audit events across regions. This is causing compliance concerns for regulated industry clients and hampering security investigations.",
+    department: "Security",
+    responsibleDepartment: "Security Operations",
+    weeklyTrend: "Decreasing",
+    totalTickets: 28,
+    previousCycle: 35,
+    tickets: [
+      {
+        id: "AUDIT-001",
+        title: "Missing Failed Authentication Logs",
+        url: "https://app.intercom.com/tickets/AUDIT-001",
+        date: "2024-03-16",
+        issueDetails: "Critical authentication failure events not appearing in audit logs",
+        summary: "Security team at FinCorp unable to track failed authentication attempts in audit logs. Investigation reveals gaps in failed login event capturing. Compliance impact: Unable to meet SOC 2 requirements for authentication monitoring."
       }
     ]
   }
