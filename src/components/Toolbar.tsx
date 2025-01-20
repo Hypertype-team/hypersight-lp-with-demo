@@ -63,7 +63,7 @@ const Toolbar = () => {
             className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity text-white px-6 py-2 text-sm font-medium"
             onClick={() => window.location.href = 'https://hypertype.fillout.com/talktosales?_gl=1*1e9dlxb*_gcl_au*MTQxOTAzNDA1OC4xNzMxNTgzNTYz'}
           >
-            Book a demo
+            Talk to Sales
           </Button>
         </div>
       </div>
