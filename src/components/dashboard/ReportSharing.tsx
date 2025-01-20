@@ -7,8 +7,8 @@ const ReportSharing = () => {
     <div className="rounded-xl border bg-white p-4 shadow-sm">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-sm font-medium">Need custom features?</h3>
-          <p className="text-xs text-gray-500 mt-1">Talk to our sales team</p>
+          <h3 className="text-sm font-medium">Want to know more?</h3>
+          <p className="text-xs text-gray-500 mt-1">Talk to our team</p>
         </div>
         <Button
           size="sm"
