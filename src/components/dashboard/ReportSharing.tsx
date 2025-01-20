@@ -1,42 +1,35 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Mail, Slack } from "lucide-react";
-import { toast } from "sonner";
+import { MessageSquare } from "lucide-react";
 
 const ReportSharing = () => {
-  const handleSlackShare = () => {
-    toast.success("Demo: Report shared to Slack", {
-      description: "In a real implementation, this would share the report to Slack"
-    });
-  };
-
-  const handleEmailShare = () => {
-    toast.success("Demo: Report shared via email", {
-      description: "In a real implementation, this would share the report via email"
-    });
-  };
-
   return (
-    <div className="rounded-xl border bg-white p-4 shadow-sm">
-      <h3 className="text-lg font-medium mb-4">Share Report</h3>
-      <div className="flex gap-4">
-        <Button
-          variant="outline"
-          onClick={handleSlackShare}
-          className="flex items-center gap-2"
-        >
-          <Slack className="h-4 w-4" />
-          Share to Slack
-        </Button>
-        <Button
-          variant="outline"
-          onClick={handleEmailShare}
-          className="flex items-center gap-2"
-        >
-          <Mail className="h-4 w-4" />
-          Share via Email
-        </Button>
+    <div className="rounded-xl border bg-white p-6 shadow-sm">
+      <h3 className="text-lg font-medium mb-2">Need More?</h3>
+      <p className="text-gray-600 mb-4">
+        Looking for custom integrations or specific features? Our team is here to help you get the most out of our platform.
+      </p>
+      <div className="space-y-3">
+        <div className="flex items-center gap-2 text-sm text-gray-600">
+          <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+          Custom support integrations
+        </div>
+        <div className="flex items-center gap-2 text-sm text-gray-600">
+          <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+          Tailored reporting features
+        </div>
+        <div className="flex items-center gap-2 text-sm text-gray-600">
+          <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+          Enterprise-grade solutions
+        </div>
       </div>
+      <Button
+        className="w-full mt-6 bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white"
+        onClick={() => window.open('https://hypertype.fillout.com/talktosales?_gl=1*fyovem*_gcl_au*MTQxOTAzNDA1OC4xNzMxNTgzNTYz', '_blank')}
+      >
+        <MessageSquare className="mr-2 h-4 w-4" />
+        Talk to Sales
+      </Button>
     </div>
   );
 };
