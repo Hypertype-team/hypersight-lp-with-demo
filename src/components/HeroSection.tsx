@@ -64,7 +64,7 @@ const HeroSection = () => {
             </Button>
             <Button
               variant="outline"
-              className="border-white/20 text-white hover:bg-white/10 px-6 py-6 text-base md:text-lg rounded-lg w-full sm:w-auto"
+              className="bg-black/80 border-white/20 text-white hover:bg-black/60 px-6 py-6 text-base md:text-lg rounded-lg w-full sm:w-auto"
               onClick={scrollToFeatures}
             >
               Learn More
