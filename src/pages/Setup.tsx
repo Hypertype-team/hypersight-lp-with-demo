@@ -22,7 +22,7 @@ const Setup = () => {
       return;
     }
     toast.success("Settings saved successfully!");
-    navigate("/reports");
+    navigate('/demo');
   };
 
   return (
