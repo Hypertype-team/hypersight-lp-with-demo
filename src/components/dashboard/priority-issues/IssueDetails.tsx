@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, Mail, Slack } from "lucide-react";
 import { PriorityIssue } from "@/types/priority-issues";
 import TicketList from "./TicketList";
+import { toast } from "sonner";
 
 interface IssueDetailsProps {
   issue: PriorityIssue;
@@ -13,6 +14,18 @@ interface IssueDetailsProps {
 
 const IssueDetails = ({ issue, isExpanded, showTickets, onToggleTickets }: IssueDetailsProps) => {
   if (!isExpanded) return null;
+
+  const handleSlackShare = () => {
+    toast.success("Demo: Report shared to Slack", {
+      description: `The ${issue.title} report has been shared to Slack`
+    });
+  };
+
+  const handleEmailShare = () => {
+    toast.success("Demo: Report shared via email", {
+      description: `The ${issue.title} report has been shared via email`
+    });
+  };
 
   return (
     <motion.div
@@ -43,7 +56,7 @@ const IssueDetails = ({ issue, isExpanded, showTickets, onToggleTickets }: Issue
           <p className="text-gray-600">{issue.responsibleDepartment}</p>
         </div>
         
-        <div className="pt-2">
+        <div className="space-y-4">
           <Button
             onClick={onToggleTickets}
             variant="outline"
@@ -58,6 +71,25 @@ const IssueDetails = ({ issue, isExpanded, showTickets, onToggleTickets }: Issue
           </Button>
           
           <TicketList tickets={issue.tickets} isExpanded={showTickets} />
+
+          <div className="flex gap-3 pt-2">
+            <Button
+              variant="outline"
+              onClick={handleSlackShare}
+              className="flex items-center gap-2"
+            >
+              <Slack className="h-4 w-4" />
+              Share to Slack
+            </Button>
+            <Button
+              variant="outline"
+              onClick={handleEmailShare}
+              className="flex items-center gap-2"
+            >
+              <Mail className="h-4 w-4" />
+              Share via Email
+            </Button>
+          </div>
         </div>
       </div>
     </motion.div>
