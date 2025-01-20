@@ -58,7 +58,15 @@ const HeroSection = () => {
           >
             <Button
               className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity text-white px-6 py-6 text-base md:text-lg rounded-lg w-full sm:w-auto"
-              onClick={() => window.location.href = '/demo'}
+              onClick={() => {
+                const demoSection = document.getElementById('features');
+                if (demoSection) {
+                  demoSection.scrollIntoView({ behavior: 'smooth' });
+                }
+                setTimeout(() => {
+                  window.location.href = '/demo';
+                }, 1000);
+              }}
             >
               See our Demo
             </Button>
