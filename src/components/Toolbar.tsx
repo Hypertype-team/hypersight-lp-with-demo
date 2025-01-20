@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
 const Toolbar = () => {
   const navigate = useNavigate();
@@ -67,6 +68,22 @@ const Toolbar = () => {
           </Button>
         </div>
       </div>
+      
+      {/* Back to Website Button */}
+      <a
+        href="https://hypersight.se"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 left-6 z-50"
+      >
+        <Button
+          variant="outline"
+          className="bg-white/10 hover:bg-white/20 text-white border-white/20 gap-2"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back to Website
+        </Button>
+      </a>
     </motion.div>
   );
 };
