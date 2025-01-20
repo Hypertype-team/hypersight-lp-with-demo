@@ -4,10 +4,13 @@ import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ReportSharing from "@/components/dashboard/ReportSharing";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 
 const Demo = () => {
   const [isConnecting, setIsConnecting] = useState(false);
   const [connectingPlatform, setConnectingPlatform] = useState<string | null>(null);
+  const [cyclePeriod, setCyclePeriod] = useState<string>("");
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -20,6 +23,15 @@ const Demo = () => {
   ];
 
   const handleConnect = async (platform: string) => {
+    if (!cyclePeriod) {
+      toast({
+        title: "Cycle Period Required",
+        description: "Please select a cycle period before connecting.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsConnecting(true);
     setConnectingPlatform(platform);
     
@@ -39,6 +51,8 @@ const Demo = () => {
       duration: 5000,
     });
     
+    // Store the cycle period in localStorage or state management
+    localStorage.setItem('cyclePeriod', cyclePeriod);
     navigate('/reports');
   };
 
@@ -47,9 +61,31 @@ const Demo = () => {
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">Connect Your Support System</h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-gray-600 mb-8">
             Choose your support platform to get started
           </p>
+
+          <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-sm border mb-8">
+            <h2 className="text-lg font-semibold mb-4">Select Cycle Period</h2>
+            <RadioGroup
+              value={cyclePeriod}
+              onValueChange={setCyclePeriod}
+              className="gap-4"
+            >
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="weekly" id="weekly" />
+                <Label htmlFor="weekly">Weekly</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="biweekly" id="biweekly" />
+                <Label htmlFor="biweekly">Biweekly</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="monthly" id="monthly" />
+                <Label htmlFor="monthly">Monthly</Label>
+              </div>
+            </RadioGroup>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
