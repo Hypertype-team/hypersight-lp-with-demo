@@ -21,30 +21,30 @@ const priorityIssues: PriorityIssue[] = [
     id: "auth",
     title: "User Authentication & Access",
     urgencyLevel: "High",
-    reason: "High customer dissatisfaction and potential loss of trust in product reliability",
-    description: "Customers reported concerns about authentication performance, network balancing, and integration issues. Some queries highlight delays in functionality visibility within the app.",
-    detailedSummary: "Multiple users have reported persistent issues with the authentication system, particularly during peak usage hours. The problems range from delayed login responses to complete authentication failures. Users are experiencing intermittent session timeouts and difficulties with password reset workflows. The mobile app authentication seems to be more severely affected than the web platform. These issues are causing significant user frustration and impacting their ability to access critical features of the platform.",
-    department: "Hardware",
-    responsibleDepartment: "Product & Tech",
+    reason: "Critical system access issues affecting multiple enterprise customers",
+    description: "Multiple enterprise customers reporting authentication failures and intermittent access issues across platform features.",
+    detailedSummary: "Enterprise customers are experiencing significant authentication challenges, particularly during peak business hours. Issues include session timeouts, MFA verification delays, and inconsistent access to critical features. Several high-priority clients have reported that these issues are impacting their operations and team productivity. The mobile app authentication is particularly affected, with users reporting longer than usual login times and occasional complete authentication failures.",
+    department: "Security",
+    responsibleDepartment: "Platform Engineering",
     weeklyTrend: "Increasing",
-    totalTickets: 45,
-    previousCycle: 32,
+    totalTickets: 52,
+    previousCycle: 38,
     tickets: [
       {
-        id: "T-001",
-        title: "Battery functionality uncertainty and Virtual Grid connection issues",
-        url: "https://app.intercom.com/tickets/T-001",
-        date: "2024-03-15",
-        issueDetails: "Osäkerhet kring batterifunktion och anslutningsproblem med Virtuellt Kraftnät",
-        summary: "A user expressed uncertainty about their battery functionality and questioned their connection to a virtual power grid. They also mentioned issues connecting a Pixii unit due to a missing QR code and expressed concerns about their investment."
+        id: "SEC-001",
+        title: "Enterprise SSO Integration Failure",
+        url: "https://app.intercom.com/tickets/SEC-001",
+        date: "2024-03-18",
+        issueDetails: "Critical SSO authentication failure affecting multiple enterprise users",
+        summary: "Multiple users from Enterprise client ABC Corp reporting complete SSO authentication failure. Users unable to access the platform through their corporate SSO integration. Initial investigation suggests potential SAML configuration issue."
       },
       {
-        id: "T-002",
-        title: "Authentication failure during peak hours",
-        url: "https://app.intercom.com/tickets/T-002",
-        date: "2024-03-14",
-        issueDetails: "Authentication system completely unresponsive",
-        summary: "Multiple users reported complete authentication system failure during peak usage hours, preventing access to critical features."
+        id: "SEC-002",
+        title: "MFA Verification Delays",
+        url: "https://app.intercom.com/tickets/SEC-002",
+        date: "2024-03-17",
+        issueDetails: "Significant delays in MFA code delivery and verification",
+        summary: "Users experiencing delays of up to 5 minutes in receiving MFA codes. Some users report codes expiring before they arrive. Issue appears to be affecting both SMS and email delivery methods."
       }
     ]
   },
@@ -52,45 +52,45 @@ const priorityIssues: PriorityIssue[] = [
     id: "data",
     title: "Data Integration Issues",
     urgencyLevel: "High",
-    reason: "Direct impact on home comfort and system efficiency",
-    description: "Critical cases of non-functioning or inefficient data integrations with questions about proper configuration and usage.",
-    detailedSummary: "The data integration system is experiencing significant challenges with real-time synchronization between different platform components. Users are reporting delays in data updates, particularly affecting energy consumption metrics and smart device status updates. Several instances of data inconsistency have been noted, where information displayed in different parts of the system shows conflicting values. This is causing confusion among users and affecting their ability to make informed decisions about their energy usage.",
-    department: "Operations",
-    responsibleDepartment: "Product & Tech",
+    reason: "Data inconsistencies affecting customer reporting and analytics",
+    description: "Widespread data synchronization issues causing discrepancies in customer analytics and reporting dashboards.",
+    detailedSummary: "Multiple customers are reporting significant delays and inconsistencies in their data synchronization processes. This is causing discrepancies between real-time data displays and generated reports. The issue is particularly impacting customers who rely on our platform for critical business analytics and decision-making. Several enterprise clients have reported that these inconsistencies are affecting their ability to make data-driven decisions and track key performance metrics.",
+    department: "Data Engineering",
+    responsibleDepartment: "Data Platform",
     weeklyTrend: "Stable",
-    totalTickets: 38,
-    previousCycle: 36,
+    totalTickets: 43,
+    previousCycle: 41,
     tickets: [
       {
-        id: "T-003",
-        title: "Data sync failing between app and grid",
-        url: "https://app.intercom.com/tickets/T-003",
-        date: "2024-03-13",
-        issueDetails: "Data synchronization failures",
-        summary: "Multiple instances of data synchronization failures between the app and grid system, causing inconsistent readings and user confusion."
+        id: "DATA-001",
+        title: "Real-time Analytics Delay",
+        url: "https://app.intercom.com/tickets/DATA-001",
+        date: "2024-03-16",
+        issueDetails: "Significant lag in real-time analytics updates",
+        summary: "Enterprise customer XYZ Industries reporting 30+ minute delays in their real-time analytics dashboard updates. Critical business metrics are not reflecting current operations, impacting decision-making processes."
       }
     ]
   },
   {
     id: "api",
-    title: "API Connection Errors",
+    title: "API Performance Issues",
     urgencyLevel: "Medium",
-    reason: "Affects system efficiency and customer satisfaction",
-    description: "Concerns about API reliability and efficiency in data transfer, with unclear expectations for performance.",
-    detailedSummary: "The API infrastructure is showing signs of strain during high-traffic periods, resulting in increased response times and occasional timeout errors. Users are experiencing delays in data retrieval and updates, particularly when accessing historical energy consumption data. The system's real-time monitoring capabilities are being affected, with some users reporting delays of up to 30 seconds in receiving updates. These issues are most prominent during peak usage hours and are affecting the platform's ability to provide timely information to users.",
-    department: "Installation",
-    responsibleDepartment: "Backend Team",
+    reason: "Degraded API response times impacting application performance",
+    description: "Increasing reports of API latency and occasional timeout errors during peak usage periods.",
+    detailedSummary: "Users are experiencing degraded performance when accessing certain API endpoints, particularly during high-traffic periods. Response times have increased significantly for some operations, with occasional timeout errors being reported. The issues are most pronounced during peak business hours and are affecting the overall user experience of the platform. Several customers have reported that these delays are impacting their workflow efficiency.",
+    department: "Backend",
+    responsibleDepartment: "Platform Engineering",
     weeklyTrend: "Decreasing",
-    totalTickets: 28,
-    previousCycle: 41,
+    totalTickets: 31,
+    previousCycle: 45,
     tickets: [
       {
-        id: "T-004",
-        title: "API timeout during peak hours",
-        url: "https://app.intercom.com/tickets/T-004",
-        date: "2024-03-12",
-        issueDetails: "API response delays and timeouts",
-        summary: "Users experiencing significant delays and timeouts when accessing API endpoints during peak usage hours."
+        id: "API-001",
+        title: "Bulk Operation Timeouts",
+        url: "https://app.intercom.com/tickets/API-001",
+        date: "2024-03-15",
+        issueDetails: "Bulk API operations timing out during peak hours",
+        summary: "Multiple customers reporting timeout errors when performing bulk operations through the API. Operations affected include batch data updates and mass record retrievals. Issue appears to be correlated with high system load during business hours."
       }
     ]
   }
