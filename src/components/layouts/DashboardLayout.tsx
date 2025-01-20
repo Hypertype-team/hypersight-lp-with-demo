@@ -1,5 +1,6 @@
 import { Home, BarChart2, Settings } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -15,7 +16,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
     <div className="min-h-screen bg-white">
       {/* Sidebar */}
-      <div className="fixed left-0 top-0 h-full w-64 bg-white border-r border-gray-200 p-4">
+      <div className="fixed left-0 top-0 h-full w-64 bg-white border-r border-gray-200 p-4 flex flex-col">
         <div className="mb-8 px-4">
           <img
             src="/lovable-uploads/99af36c9-7743-4308-adc1-ee20870b7654.png"
@@ -53,6 +54,17 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             <span>Settings</span>
           </div>
         </nav>
+        
+        {/* Back to Website Button */}
+        <div className="mt-auto pt-4">
+          <Button
+            variant="outline"
+            className="w-full"
+            onClick={() => window.location.href = 'https://hypersight.se'}
+          >
+            Back to Website
+          </Button>
+        </div>
       </div>
 
       {/* Main Content */}
