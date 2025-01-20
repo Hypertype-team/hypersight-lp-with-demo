@@ -23,12 +23,6 @@ const Demo = () => {
     setIsConnecting(true);
     setConnectingPlatform(platform);
     
-    toast({
-      title: "API Key Required",
-      description: `Please provide your ${platform} API key to connect your account.`,
-      duration: 5000,
-    });
-
     await new Promise(resolve => setTimeout(resolve, 2000));
     
     setIsConnecting(false);
