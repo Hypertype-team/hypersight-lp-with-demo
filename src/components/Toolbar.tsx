@@ -1,58 +1,72 @@
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
-import { useNavigate, useLocation } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Toolbar = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const isDemoPage = location.pathname === "/demo";
+  
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
 
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/80 to-black/0 backdrop-blur-sm"
+      transition={{ duration: 0.5 }}
+      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg bg-black/30 border-b border-white/10"
     >
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
+        <div className="flex items-center justify-center w-48">
+          <img
+            src="/lovable-uploads/5ccb21ed-ed75-4028-88e0-b8853f7423d7.png"
+            alt="Hypersight Logo"
+            className="w-44 object-contain"
+          />
+        </div>
+        <div className="flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-6">
+            <button 
+              onClick={() => scrollToSection('features')} 
+              className="text-white/80 hover:text-white transition-colors text-sm font-medium"
+            >
+              Features
+            </button>
+            <button 
+              onClick={() => scrollToSection('pricing')} 
+              className="text-white/80 hover:text-white transition-colors text-sm font-medium"
+            >
+              Pricing
+            </button>
+            <button 
+              onClick={() => navigate('/demo')}
+              className="text-white/80 hover:text-white transition-colors text-sm font-medium"
+            >
+              Demo
+            </button>
+            <a 
+              href="https://www.hypertype.ai/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/80 hover:text-white transition-colors text-sm font-medium"
+            >
+              Hypertype
+            </a>
+          </nav>
           <Button
-            variant="ghost"
-            className="text-white hover:bg-white/10"
-            onClick={() => navigate("/")}
+            className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity text-white px-6 py-2 text-sm font-medium"
+            onClick={() => window.location.href = 'https://hypertype.fillout.com/talktosales?_gl=1*1e9dlxb*_gcl_au*MTQxOTAzNDA1OC4xNzMxNTgzNTYz'}
           >
-            <span className="font-bold text-xl bg-gradient-to-r from-[#eec5bd] to-[#96a6fd] bg-clip-text text-transparent">
-              Hypersight
-            </span>
-          </Button>
-          <Button
-            variant="ghost"
-            className="text-white hover:bg-white/10"
-            onClick={() => navigate("/reports")}
-          >
-            Reports
+            Book a demo
           </Button>
         </div>
       </div>
-      
-      {/* Back to Website Button - Only shown on Demo page */}
-      {isDemoPage && (
-        <a
-          href="https://hypersight.se"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="fixed bottom-6 left-6 z-50"
-        >
-          <Button
-            variant="outline"
-            className="bg-white/10 hover:bg-white/20 text-white border-white/20 gap-2"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Website
-          </Button>
-        </a>
-      )}
     </motion.div>
   );
 };
