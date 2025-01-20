@@ -18,7 +18,7 @@ const IntegrationsSection = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="relative order-2 lg:order-1"
+            className="relative lg:order-1 order-1"
           >
             <div className="relative w-full max-w-[500px] aspect-square mx-auto flex items-center justify-center">
               {/* Center Hypersight logo */}
@@ -102,7 +102,7 @@ const IntegrationsSection = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-left space-y-6 order-1 lg:order-2 px-4 lg:px-0"
+            className="text-left space-y-6 lg:order-2 order-2"
           >
             <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#9b87f5] to-[#7E69AB] bg-clip-text text-transparent text-center lg:text-left">
               Connect Your Support Stack
