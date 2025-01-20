@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import ReportSharing from "@/components/dashboard/ReportSharing";
 
 const Demo = () => {
   const [isConnecting, setIsConnecting] = useState(false);
@@ -51,7 +52,7 @@ const Demo = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           {platforms.map((platform) => (
             <div 
               key={platform.name}
@@ -74,6 +75,10 @@ const Demo = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-8">
+          <ReportSharing />
         </div>
       </div>
     </div>
