@@ -2,6 +2,7 @@ import DashboardLayout from "@/components/layouts/DashboardLayout";
 import PriorityIssues from "@/components/dashboard/PriorityIssues";
 import DepartmentTickets from "@/components/dashboard/DepartmentTickets";
 import SystemPerformanceChart from "@/components/dashboard/SystemPerformanceChart";
+import ReportSharing from "@/components/dashboard/ReportSharing";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
@@ -9,10 +10,10 @@ import { addDays, format, subDays, isAfter } from "date-fns";
 import { FutureDataMessage } from "@/components/dashboard/FutureDataMessage";
 
 const Reports = () => {
-  const [currentCycleStart, setCurrentCycleStart] = useState(() => new Date(2025, 0, 6)); // January 6th, 2025
+  const [currentCycleStart, setCurrentCycleStart] = useState(() => new Date(2025, 0, 6));
   
   const cycleLength = 14;
-  const futureDataDate = new Date(2025, 1, 3); // February 3rd, 2025
+  const futureDataDate = new Date(2025, 1, 3);
 
   const handlePreviousCycle = () => {
     setCurrentCycleStart(prevDate => subDays(prevDate, cycleLength));
@@ -27,7 +28,7 @@ const Reports = () => {
 
   const cycleEndDate = addDays(currentCycleStart, cycleLength - 1);
   const cycleDateRange = `${format(currentCycleStart, 'MMM d')} - ${format(cycleEndDate, 'MMM d, yyyy')}`;
-  const isFutureCycle = isAfter(currentCycleStart, new Date(2025, 0, 19)); // After January 19th, 2025
+  const isFutureCycle = isAfter(currentCycleStart, new Date(2025, 0, 19));
   const isNextCycleDisabled = isAfter(addDays(currentCycleStart, cycleLength), addDays(futureDataDate, -cycleLength));
 
   return (
@@ -38,6 +39,7 @@ const Reports = () => {
             <h1 className="text-2xl font-semibold text-gray-900">Support Analytics Reports</h1>
             <p className="text-gray-600">Detailed analysis and insights from your support data</p>
           </div>
+          <ReportSharing />
         </div>
 
         <div className="flex items-center justify-center mb-6">
