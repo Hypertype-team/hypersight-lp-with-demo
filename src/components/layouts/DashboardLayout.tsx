@@ -46,17 +46,12 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             <BarChart2 className="w-5 h-5" />
             <span>Reports</span>
           </Link>
-          <Link
-            to="/settings"
-            className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors ${
-              isActive('/settings') 
-                ? 'bg-primary text-white' 
-                : 'text-gray-600 hover:bg-gray-100'
-            }`}
+          <div
+            className="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-400 cursor-not-allowed"
           >
             <Settings className="w-5 h-5" />
             <span>Settings</span>
-          </Link>
+          </div>
         </nav>
       </div>
 
