@@ -45,7 +45,7 @@ const Toolbar = () => {
               Pricing
             </button>
             <button 
-              onClick={() => navigate('/demo')}
+              onClick={() => navigate('/setup')}
               className="text-white/80 hover:text-white transition-colors text-sm font-medium"
             >
               Demo
