@@ -60,7 +60,7 @@ const HeroSection = () => {
               className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity text-white px-6 py-6 text-base md:text-lg rounded-lg w-full sm:w-auto"
               onClick={() => window.location.href = '/demo'}
             >
-              See our Demo
+              Test our Demo
             </Button>
             <Button
               variant="outline"
