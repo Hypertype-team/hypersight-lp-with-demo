@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 
-const PricingCard = ({ title, frequency, originalPrice, earlyBirdPrice, yearlyPrice, features }) => (
+const PricingCard = ({ title, frequency, features }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -14,11 +14,6 @@ const PricingCard = ({ title, frequency, originalPrice, earlyBirdPrice, yearlyPr
     <div className="flex-grow">
       <h3 className="text-2xl font-bold text-white mb-2">{title}</h3>
       <p className="text-gray-400 mb-4">{frequency}</p>
-      <div className="mb-6">
-        <div className="text-gray-400 line-through mb-1">${originalPrice}/month</div>
-        <div className="text-4xl font-bold text-white">${earlyBirdPrice}/month</div>
-        <div className="text-primary mt-1">${yearlyPrice} billed yearly</div>
-      </div>
       <ul className="space-y-4 mb-8">
         {features.map((feature, index) => (
           <li key={index} className="text-gray-300 flex items-start gap-2">
@@ -54,9 +49,6 @@ const PricingSection = () => {
     {
       title: "Essential Insights",
       frequency: "Reports every two weeks",
-      originalPrice: "800",
-      earlyBirdPrice: "300",
-      yearlyPrice: "3,600",
       features: [
         "Unlimited tickets during analysis period",
         "Bi-weekly comprehensive reports",
@@ -68,9 +60,6 @@ const PricingSection = () => {
     {
       title: "Pro Analytics",
       frequency: "Reports every week",
-      originalPrice: "1,500",
-      earlyBirdPrice: "500",
-      yearlyPrice: "6,000",
       features: [
         "Unlimited tickets during analysis period",
         "Weekly comprehensive reports",
@@ -82,9 +71,6 @@ const PricingSection = () => {
     {
       title: "Enterprise Intelligence",
       frequency: "Reports every day",
-      originalPrice: "3,000",
-      earlyBirdPrice: "1,000",
-      yearlyPrice: "12,000",
       features: [
         "Unlimited tickets during analysis period",
         "Daily comprehensive reports",
